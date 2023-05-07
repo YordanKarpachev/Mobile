@@ -1,6 +1,7 @@
 package bg.softuni.mobilele.service;
 
 import bg.softuni.mobilele.model.entiti.Dto.UserLoginDTO;
+import bg.softuni.mobilele.model.entiti.Dto.UserRegisterDTO;
 import bg.softuni.mobilele.model.entiti.UserEntity;
 import bg.softuni.mobilele.repository.UserRepository;
 import bg.softuni.mobilele.user.CurrentUser;
@@ -27,6 +28,20 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+    public void registerAndLogin(UserRegisterDTO userRegisterDTO) {
+        UserEntity newUser = new UserEntity();
+        newUser.setActive(true);
+        newUser.setEmail(userRegisterDTO.getEmail());
+        newUser.setFirstName(userRegisterDTO.getFirstName());
+        newUser.setLastName(userRegisterDTO.getLastName());
+        newUser.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+        newUser = this.userRepository.save(newUser);
+
+        login(newUser);
+
+    }
+
     public boolean login(UserLoginDTO userLoginDTO) {
         Optional<UserEntity> userOpt = userRepository.findByEmail(userLoginDTO.getUsername());
 
@@ -36,26 +51,26 @@ public class UserService {
             return false;
         }
 
-        var rawPassword = userLoginDTO.getPassword();
-        var encodedPassword = userOpt.get().getPassword();
+        String rawPassword = userLoginDTO.getPassword();
+        String encodedPassword = userOpt.get().getPassword();
 
         boolean success = passwordEncoder.matches(rawPassword, encodedPassword);
 
         if (success) {
-        login(userOpt.get());
+            login(userOpt.get());
         } else {
-    logout();
+            logout();
         }
 
         return success;
     }
 
-    private void login(UserEntity user){
+    private void login(UserEntity user) {
         currentUser.setLoggedIn(true);
-        currentUser.setName(user.getFirstName() + " " +  user.getLastName());
+        currentUser.setName(user.getFirstName() + " " + user.getLastName());
     }
 
-    public void logout(){
+    public void logout() {
         currentUser.clear();
     }
 
