@@ -5,25 +5,36 @@ import bg.softuni.mobilele.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class LoginController {
+@RequestMapping("/users")
+public class UserLoginController {
 
     private final UserService userService;
 
-    public LoginController(UserService userService) {
+    public UserLoginController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/users/login")
+    @GetMapping("/logout")
+    public String logout(){
+        this.userService.logout();
+
+        return "redirect:/";
+
+    }
+
+    @GetMapping("/login")
     public String login(){
 
         return "auth-login";
     };
 
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     public String login(UserLoginDTO userLoginDTO){
-      System.out.println("User is logged " + userService.login(userLoginDTO));
+        this.userService.login(userLoginDTO);
+    //  System.out.println("User is logged " + userService.login(userLoginDTO));
         return "redirect:/";
     }
 }
