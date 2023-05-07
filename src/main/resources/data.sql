@@ -1,2 +1,2 @@
  insert into users ( email, first_name , last_name, image_url, is_active, password)
-  values ( "admin@gmail.com", "admin", "adminNachnahme", null, 1, "topSecret");
+  values ( "admin@gmail.com", "admin", "adminNachnahme", null, 1, "2c0009569ff230a4511622896cc21bf6e7cbc8414c672d3a6f76ac127f96392be58f692f2bc125aa");
