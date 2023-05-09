@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -40,19 +42,5 @@ public class UserController {
     }
 
 
-    @GetMapping("/register")
-    public String register() {
 
-
-        return "auth-register";
-    }
-
-
-    @PostMapping("/register")
-    public String register(UserRegisterDTO userRegisterDTO){
-        this.userService.registerAndLogin(userRegisterDTO);
-
-        return "index";
-
-    }
 }
