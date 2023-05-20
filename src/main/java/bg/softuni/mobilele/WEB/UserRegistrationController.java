@@ -19,8 +19,8 @@ import javax.validation.Valid;
 public class UserRegistrationController {
 
     @ModelAttribute("userModel")
-    private void initUserModel(Model model){
-        model.addAttribute("userModel", new UserRegisterDTO());
+    private UserRegisterDTO initUserModel(Model model){
+       return new UserRegisterDTO();
 
 
     }
