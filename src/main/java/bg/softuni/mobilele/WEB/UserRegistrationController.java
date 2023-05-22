@@ -1,7 +1,7 @@
 package bg.softuni.mobilele.WEB;
 
 
-import bg.softuni.mobilele.model.entiti.Dto.UserRegisterDTO;
+import bg.softuni.mobilele.model.Dto.UserRegisterDTO;
 import bg.softuni.mobilele.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +33,7 @@ public class UserRegistrationController {
 
 
     @GetMapping("/register")
-    public String register() {
+    public String register(Model model) {
 
 
         return "auth-register";
@@ -41,7 +41,8 @@ public class UserRegistrationController {
 
 
     @PostMapping("/register")
-    public String register(@Valid UserRegisterDTO userModel, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String register(@Valid UserRegisterDTO userModel, BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes){
 
         if(bindingResult.hasErrors()){
 

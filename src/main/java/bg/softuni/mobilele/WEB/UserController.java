@@ -1,14 +1,11 @@
 package bg.softuni.mobilele.WEB;
 
-import bg.softuni.mobilele.model.entiti.Dto.UserLoginDTO;
-import bg.softuni.mobilele.model.entiti.Dto.UserRegisterDTO;
+import bg.softuni.mobilele.model.Dto.UserLoginDTO;
 import bg.softuni.mobilele.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
