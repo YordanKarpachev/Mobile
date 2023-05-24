@@ -1,6 +1,7 @@
 package bg.softuni.mobilele.model.Dto;
 
 
+import bg.softuni.mobilele.model.validation.FieldMatch;
 import bg.softuni.mobilele.model.validation.UniqueUserEmail;
 
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+@FieldMatch(first = "password", second = "confirmPassword", message = "passwords do not mutch")
 public class UserRegisterDTO {
 
     @NotEmpty(message = "User email should be provided")
