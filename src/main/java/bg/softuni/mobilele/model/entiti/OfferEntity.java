@@ -1,7 +1,7 @@
 package bg.softuni.mobilele.model.entiti;
 
-import bg.softuni.mobilele.model.entiti.enums.EngineEnum;
-import bg.softuni.mobilele.model.entiti.enums.TransmissionEnum;
+import bg.softuni.mobilele.model.enums.EngineEnum;
+import bg.softuni.mobilele.model.enums.TransmissionEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
