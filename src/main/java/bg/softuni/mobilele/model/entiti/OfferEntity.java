@@ -2,14 +2,25 @@ package bg.softuni.mobilele.model.entiti;
 
 import bg.softuni.mobilele.model.enums.EngineEnum;
 import bg.softuni.mobilele.model.enums.TransmissionEnum;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "offers")
 public class OfferEntity extends BaseEntity {
 
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID",
+    strategy = "org.hibernate,id,UUIDGenerator")
+    @Type(type = "uuid-char")
+    private UUID id;
+
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -33,7 +44,7 @@ public class OfferEntity extends BaseEntity {
     private ModelEntity model;
 
     @ManyToOne
-    private UserEntity user;
+    private UserEntity seller;
 
     public String getDescription() {
         return description;
@@ -99,12 +110,12 @@ public class OfferEntity extends BaseEntity {
         this.model = model;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public UserEntity getSeller() {
+        return seller;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setSeller(UserEntity user) {
+        this.seller = user;
     }
 
     @Override
@@ -118,7 +129,15 @@ public class OfferEntity extends BaseEntity {
                 ", transmissionEnum=" + transmissionEnum +
                 ", year=" + year +
                 ", model=" + model +
-                ", user=" + user +
+                ", user=" + seller +
                 '}';
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

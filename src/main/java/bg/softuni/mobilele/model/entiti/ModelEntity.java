@@ -8,6 +8,19 @@ import javax.persistence.*;
 @Table(name = "models")
 public class ModelEntity extends BaseEntity {
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+
     @Enumerated(EnumType.STRING)
     private CategoryEnums category;
 
@@ -16,11 +29,11 @@ public class ModelEntity extends BaseEntity {
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
 
-    @Column(name = "start_year")
+
     private int startYear;
 
-    @Column(name = "end_year")
-    private int endYear;
+
+    private Long endYear;
 
     @ManyToOne
     private BrandEntity brand;
@@ -58,13 +71,9 @@ public class ModelEntity extends BaseEntity {
         this.startYear = startYear;
     }
 
-    public int getEndYear() {
-        return endYear;
-    }
 
-    public void setEndYear(int endYear) {
-        this.endYear = endYear;
-    }
+
+
 
     public BrandEntity getBrand() {
         return brand;
@@ -74,15 +83,12 @@ public class ModelEntity extends BaseEntity {
         this.brand = brand;
     }
 
-    @Override
-    public String toString() {
-        return "ModelEntity{" +
-                "category=" + category +
-                ", name='" + name + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", startYear=" + startYear +
-                ", endYear=" + endYear +
-                ", brand=" + brand != null ? brand.getName() : ""+
-                '}';
+
+    public Long getEndYear() {
+        return endYear;
+    }
+
+    public void setEndYear(Long endYear) {
+        this.endYear = endYear;
     }
 }
