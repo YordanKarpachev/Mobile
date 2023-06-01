@@ -8,17 +8,8 @@ import javax.persistence.*;
 @Table(name = "models")
 public class ModelEntity extends BaseEntity {
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
 
     @Enumerated(EnumType.STRING)

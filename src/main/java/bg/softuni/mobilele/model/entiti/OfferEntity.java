@@ -11,21 +11,24 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "offers")
-public class OfferEntity extends BaseEntity {
+public class OfferEntity {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID",
-    strategy = "org.hibernate,id,UUIDGenerator")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Type(type = "uuid-char")
     private UUID id;
 
-    @Column(nullable = false)
-    private String description;
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private EngineEnum engineEnum;
+    @Column(nullable = false)
+    private EngineEnum engine;
 
     private String imageUrl;
 
@@ -34,9 +37,12 @@ public class OfferEntity extends BaseEntity {
     @Column(nullable = false)
     private BigDecimal price;
 
+    @Column(nullable = false)
+    private String description;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TransmissionEnum transmissionEnum;
+    private TransmissionEnum transmission;
 
     private int year;
 
@@ -46,98 +52,91 @@ public class OfferEntity extends BaseEntity {
     @ManyToOne
     private UserEntity seller;
 
-    public String getDescription() {
-        return description;
+    public UUID getId() {
+        return id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+
+
+    public EngineEnum getEngine() {
+        return engine;
     }
 
-    public EngineEnum getEngineEnum() {
-        return engineEnum;
-    }
-
-    public void setEngineEnum(EngineEnum engineEnum) {
-        this.engineEnum = engineEnum;
+    public OfferEntity setEngine(EngineEnum engine) {
+        this.engine = engine;
+        return this;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public OfferEntity setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     public int getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public OfferEntity setMileage(int mileage) {
         this.mileage = mileage;
+        return this;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public OfferEntity setPrice(BigDecimal price) {
         this.price = price;
+        return this;
     }
 
-    public TransmissionEnum getTransmissionEnum() {
-        return transmissionEnum;
+    public TransmissionEnum getTransmission() {
+        return transmission;
     }
 
-    public void setTransmissionEnum(TransmissionEnum transmissionEnum) {
-        this.transmissionEnum = transmissionEnum;
+    public OfferEntity setTransmission(TransmissionEnum transmission) {
+        this.transmission = transmission;
+        return this;
     }
 
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public OfferEntity setYear(int year) {
         this.year = year;
+        return this;
     }
 
     public ModelEntity getModel() {
         return model;
     }
 
-    public void setModel(ModelEntity model) {
+    public OfferEntity setModel(ModelEntity model) {
         this.model = model;
+        return this;
     }
 
     public UserEntity getSeller() {
         return seller;
     }
 
-    public void setSeller(UserEntity user) {
-        this.seller = user;
+    public OfferEntity setSeller(UserEntity seller) {
+        this.seller = seller;
+        return this;
     }
 
-    @Override
-    public String toString() {
-        return "OfferEntity{" +
-                "description='" + description + '\'' +
-                ", engineEnum=" + engineEnum +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", mileage=" + mileage +
-                ", price=" + price +
-                ", transmissionEnum=" + transmissionEnum +
-                ", year=" + year +
-                ", model=" + model +
-                ", user=" + seller +
-                '}';
+    public String getDescription() {
+        return description;
     }
 
-    public UUID getId() {
-        return id;
+    public OfferEntity setDescription(String description) {
+        this.description = description;
+        return this;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
 }
