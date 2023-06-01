@@ -35,6 +35,21 @@ public class MobileUserDetails implements UserDetails {
         return username;
     }
 
+    public String getFullName(){
+        StringBuilder fullName = new StringBuilder();
+        if(getFirstName() != null){
+           fullName.append(firstName);
+        }
+
+        if(getLastName() != null){
+            if(!fullName.isEmpty()){
+                fullName.append(" ");
+            }
+            fullName.append(getLastName());
+        }
+        return fullName.toString();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

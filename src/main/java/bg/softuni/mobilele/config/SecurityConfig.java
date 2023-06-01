@@ -23,7 +23,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    UserDetailsService userDetailsService(UserRepository userRepository){
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new MobileUserDetailsService(userRepository);
     }
 
@@ -33,7 +33,7 @@ public class SecurityConfig {
         http.
                 authorizeRequests().
                 requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                antMatchers("/", "users/login", "users/register").permitAll().
+                antMatchers("/", "/users/login", "/users/register").permitAll().
                 anyRequest().
                 authenticated().
                 and().
@@ -46,9 +46,12 @@ public class SecurityConfig {
                 and().
                 logout().
                 logoutUrl("/users/logout").
+                logoutSuccessUrl("/").
                 invalidateHttpSession(true).
                 deleteCookies("JSESSIONID");
         return http.build();
     }
+
+
 
 }
