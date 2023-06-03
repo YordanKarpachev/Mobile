@@ -4,6 +4,12 @@ plugins {
 	id 'java'
 }
 
+jar {
+	manifest {
+		attributes 'Main-Class': 'bg.softuni.mobilele.MobileleApplication'
+	}
+}
+
 group = 'bg.softuni'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
