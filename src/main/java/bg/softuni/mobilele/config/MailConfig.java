@@ -14,7 +14,7 @@ public class MailConfig {
 
 
 
-
+/*
     @Bean
     public JavaMailSender javaMailSender(
             @Value("${spring.mail.host}") String mailHost,
@@ -39,5 +39,5 @@ public class MailConfig {
 
         return properties;
     }
-
+*/
 }

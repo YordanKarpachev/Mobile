@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 public class EmailService {
-
+/*
     private final TemplateEngine templateEngine;
     private final JavaMailSender javaMailSender;
 
@@ -45,5 +45,5 @@ public class EmailService {
             Context ctx = new Context();
             ctx.setVariable("userName", userName);
          return    templateEngine.process("email/registration", ctx);
-        }
+        } */
 }

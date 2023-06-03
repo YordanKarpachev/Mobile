@@ -47,7 +47,7 @@ public class UserService {
 
         this.userRepository.save(newUser);
         login(newUser);
-        emailService.sendRegistrationEmail(newUser.getEmail(), newUser.getFirstName() + " " + newUser.getLastName());
+      //  emailService.sendRegistrationEmail(newUser.getEmail(), newUser.getFirstName() + " " + newUser.getLastName());
 
     }
 
