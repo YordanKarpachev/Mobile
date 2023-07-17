@@ -54,7 +54,7 @@ public class UserController extends BaseController {
             return "redirect:register";
         }
 
-        this.userService.registerUser(userRegisterInfo);
+
 
         return "redirect:login";
     }
