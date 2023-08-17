@@ -4,6 +4,7 @@ package com.softuni.mobilele.services;
 import com.softuni.mobilele.domain.entities.UserEntity;
 import com.softuni.mobilele.domain.entities.UserRoleEntity;
 import com.softuni.mobilele.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ApplicationUserDetailsService implements UserDetailsService {
 
@@ -22,6 +24,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
   }
 
   @Override
+  @Transactional
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
     return
         userRepository.

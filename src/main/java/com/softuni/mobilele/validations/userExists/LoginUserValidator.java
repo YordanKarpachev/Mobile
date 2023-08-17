@@ -1,6 +1,5 @@
 package com.softuni.mobilele.validations.userExists;
 
-import com.softuni.mobilele.domain.dtoS.banding.UserLoginFormDto;
 import com.softuni.mobilele.domain.entities.UserEntity;
 import com.softuni.mobilele.repositories.UserRepository;
 import jakarta.validation.ConstraintValidator;
