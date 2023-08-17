@@ -1,3 +1,3 @@
 # Mobile
 Dies ist ein Projekt mit Lernzwecken, das letztendlich wie eine Internetseite für den Autoverkauf aussehen soll. Nutzer können sich registrieren und erhalten eine E-Mail mit einem Link zur Aktivierung. Selbstverständlich ist es möglich, sich als Administrator oder Moderator anzumelden. Man kann Fahrzeuge zum Verkauf anbieten, eigene Angebote löschen oder bearbeiten und Bilder hinzufügen. Nicht angemeldete Benutzer sehen nur die Anmelde- und Registrierungsoptionen, während angemeldete Benutzer sich ausloggen können und Autos hinzufügen können, usw.
-Um das Projekt zu nutzen, wird empfohlen, vorerst MailHog lokal zu installieren.
+Um das Projekt zu nutzen, sollte man vorerst MailHog lokal installieren.
