@@ -14,3 +14,6 @@ mail:
     username: "admin@example.com"
     password: ""
 
+#mobile:
+#    admin:
+#        defaultpass: ${DEFAULT_PASS:test}
