@@ -39,7 +39,7 @@ public class UserService implements DataBaseInitService {
         UserEntity admin = new UserEntity()
                 .setFirstName("Admin")
                 .setLastName("Adminov")
-                .setEmail("admin@example.com")
+                .setEmail("admin@example.de")
                 .setPassword(passwordEncoder.encode("topsecret"))
               //  .setPassword(passwordEncoder.encode(defaultAdminPass))
                 .setRoles(this.roleRepository.findAll());
