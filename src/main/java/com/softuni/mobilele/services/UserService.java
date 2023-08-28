@@ -56,7 +56,7 @@ public class UserService implements DataBaseInitService {
                 .setFirstName(registerDto.getFirstName())
                 .setLastName(registerDto.getLastName())
                 .setEmail(registerDto.getEmail())
-                .setPassword(registerDto.getPassword());
+                .setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
         userRepository.save(userEntity);
     }

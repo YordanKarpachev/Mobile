@@ -55,7 +55,7 @@ public class ApplicationUserDetailsServiceTest {
         Assertions.assertNotNull(adminDetails);
         Assertions.assertEquals(EXISTING_EMAIL, adminDetails.getUsername());
         Assertions.assertEquals(testUserEntity.getPassword(), adminDetails.getPassword());
-        Assertions.assertEquals(2, adminDetails.getAuthorities().size());
+        Assertions.assertEquals(2, adminDetails.getAuthorities().size(), "The authorities are supposed be just two - ADMIN/USER");
         assertRole(adminDetails.getAuthorities(),  "ROLE_ADMIN");
         assertRole(adminDetails.getAuthorities(),  "ROLE_USER");
     }
