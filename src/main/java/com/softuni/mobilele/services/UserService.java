@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements DataBaseInitService {
 
+        private EmailService emailService;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
@@ -24,11 +25,12 @@ public class UserService implements DataBaseInitService {
     @Autowired
 
     public UserService(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder
+                       , EmailService emailService
            // , @Value("${mobile.admin.defaultpass}") String defaultAdminPass
     ) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
-
+        this.emailService = emailService;
 
         this.passwordEncoder = passwordEncoder;
      //   this.defaultAdminPass = defaultAdminPass;
@@ -59,6 +61,8 @@ public class UserService implements DataBaseInitService {
                 .setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
         userRepository.save(userEntity);
+
+        this.emailService.sendRegistrationEmail(userEntity.getEmail(), userEntity.getFirstName() + " " + userEntity.getLastName());
     }
 
 
