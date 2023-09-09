@@ -42,7 +42,7 @@ public class UserServiceTest {
 
     @BeforeEach
     void  setUp(){
-        this.userService = new UserService(roleRepository, userRepository, mockPasswordEncoder);
+      //  this.userService = new UserService(roleRepository, userRepository, mockPasswordEncoder);
     }
 
 
