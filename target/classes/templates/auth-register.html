@@ -23,17 +23,15 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
 
-                <label for="firstName"
+                <label th:for="firstName"
                        class="text-white font-weight-bold">First Name</label>
 
-                <input id="firstName"
-                       name="firstName"
-                       type="text"
+                <input type="text"
                        min="2"
                        max="20"
                        class="form-control"
                        placeholder="First name"
-                th:value="*{firstName}"/>
+                th:field="*{firstName}"/>
 
                 <p th:if="${#fields.hasErrors('firstName')}"
                    class="errors alert alert-danger">
@@ -44,17 +42,16 @@
 
             <div class="form-group col-md-6 mb-3">
 
-                <label for="lastName"
+                <label th:for="lastName"
                        class="text-white font-weight-bold">Last Name</label>
 
-                <input id="lastName"
-                       name="lastName"
+                <input
                        type="text"
                        min="2"
                        max="20"
                        class="form-control"
                        placeholder="First name"
-                       th:value="*{lastName}"
+                       th:field="*{lastName}"
                 />
 
                 <p th:if="${#fields.hasErrors('lastName')}"
@@ -67,29 +64,28 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
 
-                <label for="email"
+                <label th:for="email"
                        class="text-white font-weight-bold">
                     Email
                 </label>
 
-                <input id="email"
-                       name="email"
+                <input
                        type="text"
                        min="2"
                        max="20"
                        class="form-control"
                        placeholder="email"
-                       th:value="*{email}"/>
+                       th:field="*{email}"/>
                 <p th:if="${#fields.hasErrors('email')}"
                    class="errors alert alert-danger">
-                    Email is required.
+                   Valid email is required.
                 </p>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="password"
+                <label th:for="password"
                        class="text-white font-weight-bold">
                     Password
                 </label>
@@ -100,7 +96,7 @@
                        max="20"
                        class="form-control"
                        placeholder="Password"
-                       th:value="*{password}"/>
+ />
                 <p th:if="${#fields.hasErrors('password')}"
                    class="errors alert alert-danger">
                     Password is required.
@@ -121,7 +117,7 @@
                        max="20"
                        class="form-control"
                        placeholder="Password"
-                       th:value="*{confirmPassword}"/>
+                   />
 
                 <p th:if="${#fields.hasErrors('confirmPassword')}"
                    class="errors alert alert-danger">

@@ -34,15 +34,19 @@ public class UserServiceTest {
 
     @Mock
     private PasswordEncoder mockPasswordEncoder;
+    @Mock
+    private EmailService emailService;
 
     @Captor
 
     private ArgumentCaptor<UserEntity> userEntityArgumentCaptor;
 
 
+
+
     @BeforeEach
     void  setUp(){
-      //  this.userService = new UserService(roleRepository, userRepository, mockPasswordEncoder);
+        this.userService = new UserService(roleRepository, userRepository, mockPasswordEncoder, emailService);
     }
 
 
@@ -78,5 +82,7 @@ public class UserServiceTest {
         UserEntity actualSavedUser = userEntityArgumentCaptor.getValue();
         Assertions.assertEquals(testRegistrationDTO.getEmail(), actualSavedUser.getEmail());
         Assertions.assertEquals(encodedPassword, actualSavedUser.getPassword());
+
+        Mockito.verify(emailService).sendRegistrationEmail(testRegistrationDTO.getEmail(), testRegistrationDTO.getFirstName() + " " + testRegistrationDTO.getLastName());
     }
 }
