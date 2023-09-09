@@ -67,22 +67,22 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
 
-                <label for="username"
+                <label for="email"
                        class="text-white font-weight-bold">
-                    Username
+                    Email
                 </label>
 
-                <input id="username"
-                       name="username"
+                <input id="email"
+                       name="email"
                        type="text"
                        min="2"
                        max="20"
                        class="form-control"
-                       placeholder="First name"
-                       th:value="*{username}"/>
-                <p th:if="${#fields.hasErrors('username')}"
+                       placeholder="email"
+                       th:value="*{email}"/>
+                <p th:if="${#fields.hasErrors('email')}"
                    class="errors alert alert-danger">
-                    Username is required.
+                    Email is required.
                 </p>
             </div>
         </div>
@@ -131,25 +131,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="text-center text-white font-weight-bold" for="roles">Roles</label>
-            <select id="roles"
-                    class="form-control"
-                    name="role"
-                    multiple>
-
-                <tr th:each="role: ${roles}">
-                    <option th:text="${role.role}" th:value="${role.role}"></option>
-                </tr>
-
-            </select>
-
-            <p th:if="${#fields.hasErrors('role')}"
-               class="errors alert alert-danger">
-                Selecting a role is required.
-            </p>
-
-        </div>
 
         <div class="row">
             <div class="col col-md-4">

@@ -1,7 +1,9 @@
 package com.softuni.mobilele.web;
 
 import com.softuni.mobilele.domain.dtoS.banding.UserRegisterFormDto;
+import com.softuni.mobilele.services.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +17,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/users")
 public class RegistrationController {
 
+    private UserService userService;
     public static final String BINDING_RESULT_PATH = "org.springframework.validation.BindingResult.";
+
+    @Autowired
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/register")
     public String getRegister(Model model) {
         return "auth-register";
@@ -29,12 +38,12 @@ public class RegistrationController {
             redirectAttributes.addFlashAttribute("userRegisterForm", userRegisterInfo)
                     .addFlashAttribute(BINDING_RESULT_PATH + "userRegisterForm", bindingResult);
 
-            return "redirect:register";
+            return "redirect:/users/register";
         }
 
+    this.userService.registerUser(userRegisterInfo);
 
-
-        return "redirect:login";
+        return "redirect:/users/login";
     }
 
     @ModelAttribute(name = "userRegisterForm")
