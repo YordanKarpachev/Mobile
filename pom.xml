@@ -15,6 +15,8 @@
     <description>mobilele</description>
     <properties>
         <java.version>17</java.version>
+
+
     </properties>
     <dependencies>
         <dependency>
@@ -124,6 +126,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.softuni.mobilele.MobileleApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
