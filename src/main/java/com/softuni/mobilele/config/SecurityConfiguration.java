@@ -30,7 +30,7 @@ public class SecurityConfiguration {
 
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
 
-                        requestMatchers("/", "/users/login", "/users/register", "/users/login-error").permitAll().
+                        requestMatchers("/", "/users/login", "/users/register", "/users/login-error", "/brands/all", "/offers/all").permitAll().
 
 
                 anyRequest().authenticated().

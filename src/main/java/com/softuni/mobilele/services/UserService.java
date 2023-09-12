@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserService implements DataBaseInitService {
+public class UserService  {
 
         private EmailService emailService;
     private final RoleRepository roleRepository;
@@ -36,22 +36,9 @@ public class UserService implements DataBaseInitService {
      //   this.defaultAdminPass = defaultAdminPass;
     }
 
-    @Override
-    public void dbInit() {
-        UserEntity admin = new UserEntity()
-                .setFirstName("Admin")
-                .setLastName("Adminov")
-                .setEmail("admin@example.de")
-                .setPassword(passwordEncoder.encode("topsecret"))
-              //  .setPassword(passwordEncoder.encode(defaultAdminPass))
-                .setRoles(this.roleRepository.findAll());
-        userRepository.save(admin);
-    }
 
-    @Override
-    public boolean isDbInit() {
-        return this.userRepository.count() == 0;
-    }
+
+
 
     public void registerUser(UserRegisterFormDto registerDto){
         UserEntity userEntity = new UserEntity()

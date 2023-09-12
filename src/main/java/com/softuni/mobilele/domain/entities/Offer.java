@@ -4,6 +4,7 @@ import com.softuni.mobilele.domain.enums.Engine;
 import com.softuni.mobilele.domain.enums.Transmission;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -19,16 +20,16 @@ public class Offer extends BaseEntity {
     private String imageUrl;
 
     @Column
-    private String mileage;
+    private Integer mileage;
 
     @Column
-    private String price;
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     private Transmission transmission;
 
     @Column
-    private String year;
+    private Integer year;
 
     @Column
     private Date created;
@@ -69,23 +70,6 @@ public class Offer extends BaseEntity {
         return this;
     }
 
-    public String getMileage() {
-        return mileage;
-    }
-
-    public Offer setMileage(String mileage) {
-        this.mileage = mileage;
-        return this;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public Offer setPrice(String price) {
-        this.price = price;
-        return this;
-    }
 
     public Transmission getTransmission() {
         return transmission;
@@ -96,14 +80,7 @@ public class Offer extends BaseEntity {
         return this;
     }
 
-    public String getYear() {
-        return year;
-    }
 
-    public Offer setYear(String year) {
-        this.year = year;
-        return this;
-    }
 
     public Date getCreated() {
         return created;
@@ -139,5 +116,29 @@ public class Offer extends BaseEntity {
     public Offer setSeller(UserEntity seller) {
         this.seller = seller;
         return this;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(Integer mileage) {
+        this.mileage = mileage;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 }
