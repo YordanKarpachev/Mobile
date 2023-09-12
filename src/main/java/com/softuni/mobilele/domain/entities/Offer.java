@@ -3,13 +3,18 @@ package com.softuni.mobilele.domain.entities;
 import com.softuni.mobilele.domain.enums.Engine;
 import com.softuni.mobilele.domain.enums.Transmission;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
 
 import java.math.BigDecimal;
+import java.sql.Types;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "offers")
 public class Offer extends BaseEntity {
+    @JdbcTypeCode(java.sql.Types.VARCHAR)
+    private UUID offerId;
     @Column
     private String description;
 
@@ -140,5 +145,13 @@ public class Offer extends BaseEntity {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public UUID getOfferId() {
+        return offerId;
+    }
+
+    public void setOfferId(UUID offerId) {
+        this.offerId = offerId;
     }
 }

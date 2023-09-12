@@ -1,10 +1,6 @@
 package com.softuni.mobilele.domain.dtoS.model;
 
-import com.softuni.mobilele.domain.enums.Engine;
-import com.softuni.mobilele.domain.enums.Transmission;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+
 
 import java.math.BigDecimal;
 
@@ -26,13 +22,22 @@ public class AllOffersDTO {
 
     private String transmission;
 
-    public AllOffersDTO(String description, String engine, String imageUrl, Integer mileage, BigDecimal price, String transmission) {
+    private Integer year;
+
+    private String brandName;
+
+    private String modelName;
+
+    public AllOffersDTO(String description, String engine, String imageUrl, Integer mileage, BigDecimal price, String transmission, Integer year, String brandName, String modelName) {
         this.description = description;
         this.engine = engine;
         this.imageUrl = imageUrl;
         this.mileage = mileage;
         this.price = price;
         this.transmission = transmission;
+        this.year = year;
+        this.brandName = brandName;
+        this.modelName = modelName;
     }
 
     public String getDescription() {
@@ -81,5 +86,29 @@ public class AllOffersDTO {
 
     public void setTransmission(String transmission) {
         this.transmission = transmission;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 }
