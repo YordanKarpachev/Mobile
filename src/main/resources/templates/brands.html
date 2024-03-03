@@ -1,49 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragments/head}">
 </head>
-
 <body>
 
 <div>
     <nav th:replace="~{fragments/navigation}"></nav>
 </div>
 
-<div class="container">
-    <h2 class="text-center text-white m-3">All Brands</h2>
-    <div class='row mb-4 d-flex justify-content-around'>
-        <div  class="brand-section col-md-5 mr-auto d-flex flex-column">
-            <h2>Car brand:
-                <span >Brand name</span>
-            </h2>
-            <div>Models:
-                <table>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Start Year</th>
-                        <th>End Year</th>
-                        <th>Picture</th>
-                    </tr>
-                    <tr>
-                        <th>No</th>
-                        <th >Model Name</th>
-                        <th >Model Category</th>
-                        <th >Model Start Year</th>
-                        <th >Model End Year</th>
-                        <th><img alt="image" src="/"
-                                 class="img-thumbnail rounded"></th>
-                    </tr>
-                </table>
+<div class="container-fluid">
+    <h2 class="text-center text-white mt-5">Car brand: <span th:text="${brandName}"></span></h2>
+    <div th:if="${models != null}" th:each="model : ${models}" class="row mx-auto d-flex flex-row justify-content-center">
+        <div class="card col-sm-2 col-md-3 col-lg-4 m-1 p-0">
+            <img th:src="${model.imageUrl}" class="card-img-top" alt="Model image">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${model.modelName}"></h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:text="'Category: ' + ${model.category}"></li>
+                    <li class="list-group-item" th:text="'Start Year: ' + ${model.startYear}"></li>
+                    <li class="list-group-item" th:text="'End Year: ' + ${model.endYear}"></li>
+                </ul>
+                <div class="card-body">
+                    <a th:href="@{/offers/update/{id}(id=${model.id})}" class="card-link">Update</a>
+                    <a th:href="@{/offers/delete/{id}(id=${model.id})}" class="card-link">Delete</a>
+                </div>
             </div>
         </div>
     </div>
-
-    <div>
-             <footer> </footer>
-    </div>
 </div>
+
+<div>
+    <footer> </footer>
+</div>
+
 </body>
 </html>

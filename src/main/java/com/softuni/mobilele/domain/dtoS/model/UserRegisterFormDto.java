@@ -1,4 +1,4 @@
-package com.softuni.mobilele.domain.dtoS.banding;
+package com.softuni.mobilele.domain.dtoS.model;
 
 import com.softuni.mobilele.domain.enums.UserRoleEnum;
 import com.softuni.mobilele.validations.matchingPasswords.PasswordMatch;

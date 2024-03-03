@@ -1,7 +1,7 @@
 package com.softuni.mobilele.services;
 
 
-import com.softuni.mobilele.domain.dtoS.banding.UserRegisterFormDto;
+import com.softuni.mobilele.domain.dtoS.model.UserRegisterFormDto;
 import com.softuni.mobilele.domain.entities.UserEntity;
 import com.softuni.mobilele.repositories.RoleRepository;
 import com.softuni.mobilele.repositories.UserRepository;

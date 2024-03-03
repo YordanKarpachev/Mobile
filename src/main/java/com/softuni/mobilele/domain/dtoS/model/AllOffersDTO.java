@@ -3,10 +3,11 @@ package com.softuni.mobilele.domain.dtoS.model;
 
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class AllOffersDTO {
 
-
+   private Long id;
     private String description;
 
 
@@ -28,7 +29,8 @@ public class AllOffersDTO {
 
     private String modelName;
 
-    public AllOffersDTO(String description, String engine, String imageUrl, Integer mileage, BigDecimal price, String transmission, Integer year, String brandName, String modelName) {
+    public AllOffersDTO(Long id, String description, String engine, String imageUrl, Integer mileage, BigDecimal price, String transmission, Integer year) {
+       this.id = id;
         this.description = description;
         this.engine = engine;
         this.imageUrl = imageUrl;
@@ -110,5 +112,13 @@ public class AllOffersDTO {
 
     public void setModelName(String modelName) {
         this.modelName = modelName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

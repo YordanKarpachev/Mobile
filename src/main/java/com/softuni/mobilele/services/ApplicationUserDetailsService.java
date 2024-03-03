@@ -17,41 +17,42 @@ import java.util.Optional;
 
 public class ApplicationUserDetailsService implements UserDetailsService {
 
-  private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-  public ApplicationUserDetailsService(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
+    public ApplicationUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-  @Override
-  @Transactional
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    return
-        userRepository.
-            findByEmail(email).
-            map(this::map).
-            orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found!"));
-  }
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return
+                userRepository.
+                        findByEmail(email).
+                        map(this::map).
+                        orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found!"));
+    }
 
-  private UserDetails map(UserEntity userEntity) {
-    return new User(
-        userEntity.getEmail(),
-        userEntity.getPassword(),
-        extractAuthorities(userEntity)
-    );
+    private UserDetails map(UserEntity userEntity) {
+        return new User(
+                userEntity.getEmail(),
+                userEntity.getPassword(),
+                extractAuthorities(userEntity)
+        );
 
 
-  }
+    }
 
-  private List<GrantedAuthority> extractAuthorities(UserEntity userEntity) {
-    return userEntity.
-        getRoles().
-        stream().
-        map(this::mapRole).
-        toList();
-  }
+    private List<GrantedAuthority> extractAuthorities(UserEntity userEntity) {
+        return userEntity.
+                getRoles().
+                stream().
+                map(this::mapRole).
+                toList();
+    }
 
-  private GrantedAuthority mapRole(UserRoleEntity userRoleEntity) {
-    return new SimpleGrantedAuthority("ROLE_" + userRoleEntity.getRole().name());
-  }
+    private GrantedAuthority mapRole(UserRoleEntity userRoleEntity) {
+        return new SimpleGrantedAuthority("ROLE_" + userRoleEntity.getRole().name());
+    }
+
 }
