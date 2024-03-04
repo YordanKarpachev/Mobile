@@ -1,16 +1,18 @@
 package com.softuni.mobilele.domain.dtoS.model;
 
 import com.softuni.mobilele.domain.entities.Brand;
+import com.softuni.mobilele.domain.enums.Brands;
 import com.softuni.mobilele.domain.enums.Engine;
 import com.softuni.mobilele.domain.enums.Transmission;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class OfferDetailsDTO {
 
-    private String id;
-    private String brandName;
+    private Long id;
+    private Brands brandName;
 
     private String model;
     private Engine engine;
@@ -19,18 +21,22 @@ public class OfferDetailsDTO {
 
     private Transmission transmission;
 
-    private Date created;
+    private LocalDateTime created;
 
-    private Date modified;
+    private LocalDateTime modified;
 
     private String seller;
 
+
+    private String imageUrl;
     public OfferDetailsDTO( ) {
 
     }
 
-    public OfferDetailsDTO(String brandName,String model, Engine engine, BigDecimal price, Transmission transmission, Date created, Date modified, String seller) {
-       this.model = model;
+    public OfferDetailsDTO(Long id,String imageUrl, Brands brandName,String model, Engine engine, BigDecimal price, Transmission transmission, LocalDateTime created, LocalDateTime modified, String seller) {
+       this.id = id;
+        this.imageUrl = imageUrl;
+        this.model = model;
         this.brandName = brandName;
         this.engine = engine;
         this.price = price;
@@ -64,19 +70,19 @@ public class OfferDetailsDTO {
         this.transmission = transmission;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public Date getModified() {
+    public LocalDateTime getModified() {
         return modified;
     }
 
-    public void setModified(Date modified) {
+    public void setModified(LocalDateTime modified) {
         this.modified = modified;
     }
 
@@ -98,19 +104,27 @@ public class OfferDetailsDTO {
         this.model = model;
     }
 
-    public String getBrandName() {
+    public Brands getBrandName() {
         return brandName;
     }
 
-    public void setBrandName(String brandName) {
+    public void setBrandName(Brands brandName) {
         this.brandName = brandName;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

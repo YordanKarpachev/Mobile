@@ -1,14 +1,15 @@
 package com.softuni.mobilele.domain.dtoS.model;
 
+import com.softuni.mobilele.domain.enums.Brands;
 import com.softuni.mobilele.domain.enums.ModelCategory;
 
 public class BrandViewDTO {
 
 
     private Long id;
-    private String brand;
+    private Brands brand;
 
-    private String modelName;
+
     private String name;
 
     private ModelCategory category;
@@ -24,9 +25,9 @@ public class BrandViewDTO {
 
     }
 
-    public BrandViewDTO(String brand, String modelName, String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear) {
+    public BrandViewDTO(Brands brand,  String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear) {
         this.brand = brand;
-        this.modelName = modelName;
+
         this.name = name;
         this.category = category;
         this.imageUrl = imageUrl;
@@ -34,21 +35,15 @@ public class BrandViewDTO {
         this.endYear = endYear;
     }
 
-    public String getBrand() {
+    public Brands getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(Brands brand) {
         this.brand = brand;
     }
 
-    public String getModelName() {
-        return modelName;
-    }
 
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
 
     public String getName() {
         return name;

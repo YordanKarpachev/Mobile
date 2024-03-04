@@ -1,6 +1,7 @@
 package com.softuni.mobilele.web;
 
 import com.softuni.mobilele.domain.dtoS.model.UserRegisterFormDto;
+import com.softuni.mobilele.services.EmailService;
 import com.softuni.mobilele.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/users")
 public class RegistrationController {
 
+
+    @Autowired
+    private  EmailService emailService;
+
+    public RegistrationController(EmailService emailService) {
+        this.emailService = emailService;
+    }
     @ModelAttribute(name = "userRegisterForm")
     public UserRegisterFormDto initUserRegisterFormDto() {
         return new UserRegisterFormDto();
@@ -46,7 +54,7 @@ public class RegistrationController {
         }
 
     this.userService.registerUser(userRegisterInfo);
-
+    this.emailService.sendRegistrationEmail(userRegisterInfo.getEmail(), userRegisterInfo.getFirstName() + userRegisterInfo.getLastName());
         return "redirect:/users/login";
     }
 

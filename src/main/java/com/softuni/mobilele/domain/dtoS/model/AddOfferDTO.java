@@ -1,5 +1,6 @@
 package com.softuni.mobilele.domain.dtoS.model;
 
+import com.softuni.mobilele.domain.enums.Brands;
 import com.softuni.mobilele.domain.enums.Engine;
 import com.softuni.mobilele.domain.enums.Transmission;
 import jakarta.transaction.Transaction;
@@ -10,8 +11,9 @@ import java.math.BigDecimal;
 
 public class AddOfferDTO {
 
-@NotBlank
-    private String brand;
+    private Brands brand;
+
+    private Long id;
 
     @NotNull
     private BigDecimal price;
@@ -38,11 +40,11 @@ public class AddOfferDTO {
     public AddOfferDTO() {
     }
 
-    public String getBrand() {
+    public Brands getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(Brands brand) {
         this.brand = brand;
     }
 
@@ -100,5 +102,13 @@ public class AddOfferDTO {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

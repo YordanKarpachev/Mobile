@@ -7,6 +7,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 
 import java.math.BigDecimal;
 import java.sql.Types;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -37,10 +38,10 @@ public class Offer extends BaseEntity {
     private Integer year;
 
     @Column
-    private Date created;
+    private LocalDateTime created;
 
     @Column
-    private Date modified;
+    private LocalDateTime modified;
 
     @ManyToOne
     private Model model;
@@ -86,24 +87,6 @@ public class Offer extends BaseEntity {
     }
 
 
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public Offer setCreated(Date created) {
-        this.created = created;
-        return this;
-    }
-
-    public Date getModified() {
-        return modified;
-    }
-
-    public Offer setModified(Date modified) {
-        this.modified = modified;
-        return this;
-    }
 
     public Model getModel() {
         return model;
@@ -153,5 +136,21 @@ public class Offer extends BaseEntity {
 
     public void setOfferId(UUID offerId) {
         this.offerId = offerId;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public LocalDateTime getModified() {
+        return modified;
+    }
+
+    public void setModified(LocalDateTime modified) {
+        this.modified = modified;
     }
 }

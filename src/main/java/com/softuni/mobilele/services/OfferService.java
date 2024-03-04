@@ -2,22 +2,28 @@ package com.softuni.mobilele.services;
 
 import com.softuni.mobilele.domain.dtoS.model.AddOfferDTO;
 import com.softuni.mobilele.domain.dtoS.model.AllOffersDTO;
+import com.softuni.mobilele.domain.entities.Model;
 import com.softuni.mobilele.domain.entities.Offer;
 import com.softuni.mobilele.domain.entities.UserEntity;
 import com.softuni.mobilele.repositories.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Service
 public class OfferService {
 
     @Autowired
     private final OfferRepository offerRepository;
+
+
+    @Autowired
+    private ModelService modelService;
 
     @Autowired
     public OfferService(OfferRepository offerRepository) {
@@ -54,10 +60,12 @@ public class OfferService {
        offer.setPrice(addOfferDTO.getPrice());
        offer.setTransmission(addOfferDTO.getTransmission());
        offer.setYear(addOfferDTO.getYear());
-      offer.setSeller(user);
-     //TODO  offer.setModel(addOfferDTO.getBrand());
+       offer.setSeller(user);
 
-
+        Model model  = this.modelService.findModelByBrandName(addOfferDTO.getBrand().name());
+    offer.setModel(model);
+    offer.setCreated(LocalDateTime.now());
+    offer.setModified(LocalDateTime.now());
         this.offerRepository.save(offer);
 
 
@@ -65,5 +73,29 @@ public class OfferService {
 
     public Offer findById(String id) {
         return this.offerRepository.findById(id).orElseThrow(() -> new RuntimeException("offer not found"));
+    }
+
+    public void updateOffer(AddOfferDTO addOfferDTO) {
+        Offer offer = this.offerRepository.findById(String.valueOf(addOfferDTO.getId()))
+                .orElseThrow(() -> new RuntimeException("Offer not found with id: " + addOfferDTO.getId()));
+
+        offer.setPrice(addOfferDTO.getPrice());
+        offer.setEngine(addOfferDTO.getEngine());
+        offer.setTransmission(addOfferDTO.getTransmission());
+        offer.setYear(addOfferDTO.getYear());
+        offer.setMileage(addOfferDTO.getMileage());
+        offer.setModified(LocalDateTime.now());
+
+        Model model = this.modelService.findModelByBrandName(addOfferDTO.getBrand().name());
+        offer.setModel(model);
+
+        this.offerRepository.save(offer);
+
+
+    }
+
+    public void deleteOffer(String id) {
+        Offer offer = this.offerRepository.findById(id).orElseThrow(() -> new RuntimeException("offer don´t exist"));
+        this.offerRepository.delete(offer);
     }
 }

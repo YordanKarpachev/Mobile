@@ -9,7 +9,6 @@ import com.softuni.mobilele.domain.entities.Offer;
 import com.softuni.mobilele.domain.entities.UserEntity;
 import com.softuni.mobilele.domain.enums.Engine;
 import com.softuni.mobilele.domain.enums.Transmission;
-import com.softuni.mobilele.services.ApplicationUserDetailsService;
 import com.softuni.mobilele.services.BrandService;
 import com.softuni.mobilele.services.OfferService;
 import com.softuni.mobilele.services.UserService;
@@ -39,7 +38,8 @@ public class OffersController {
 
 
     @Autowired
-private UserService userService;
+    private UserService userService;
+
     @Autowired
     public OffersController(OfferService offerService) {
         this.offerService = offerService;
@@ -48,7 +48,7 @@ private UserService userService;
     public static final String BINDING_RESULT_PATH = "org.springframework.validation.BindingResult.";
 
     @ModelAttribute(name = "addOfferDto")
-    public AddOfferDTO initAddOfferDto(){
+    public AddOfferDTO initAddOfferDto() {
         return new AddOfferDTO();
     }
 
@@ -59,22 +59,13 @@ private UserService userService;
             size = 4
     ) Pageable pageable) {
         Page<AllOffersDTO> allOffersDTOS = this.offerService.getAllOffersDTOS(pageable);
-
         model.addAttribute("dtos", allOffersDTOS);
-
         return "offers";
     }
 
     @GetMapping("/add")
     public String getAddOffer(Model model) {
-        List<Brand> brands = this.brandService.getAllBrands();
-        model.addAttribute("brands", brands);
-        model.addAttribute("brand", new Brand());
-        model.addAttribute("engines", Engine.values());
-        model.addAttribute("engine", Engine.class);
-        model.addAttribute("transmissions", Transmission.values());
-        model.addAttribute("transmission", Transmission.class);
-
+        addCommonAttributes(model);
         return "offer-add";
     }
 
@@ -82,35 +73,80 @@ private UserService userService;
     public String postAddOffer(@Valid @ModelAttribute(name = "addOfferDto") AddOfferDTO addOfferDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes,
-                               @AuthenticationPrincipal UserDetails prncipal){
-
+                               @AuthenticationPrincipal UserDetails prncipal) {
         UserEntity user = this.userService.findUserEntityByUsername(prncipal.getUsername());
-
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addOfferDto", addOfferDTO)
                     .addFlashAttribute(BINDING_RESULT_PATH + "addOfferDto", bindingResult);
-
             return "redirect:/offers/add";
         }
-
         this.offerService.saveOffer(addOfferDTO, user);
         return "redirect:/offers/all";
     }
 
     @GetMapping("/{id}")
-    public String offerId(Model model, @PathVariable String id){
-        OfferDetailsDTO offerDetailsDTO = this.map(this.offerService.findById(id));
-
-
-
-        model.addAttribute("offerDetails", offerDetailsDTO );
-
+    public String offerId(Model model, @PathVariable String id) {
+        OfferDetailsDTO offerDetailsDTO = this.mapOfferToOfferDetailsDTO(this.offerService.findById(id));
+        model.addAttribute("offerDetails", offerDetailsDTO);
         return "details";
     }
 
-    private OfferDetailsDTO map(Offer offer){
-        return new OfferDetailsDTO(offer.getModel().getBrand().getName(),offer.getModel().getName(), offer.getEngine(), offer.getPrice(), offer.getTransmission(), offer.getCreated(), offer.getModified(),
-                offer.getSeller().getFirstName() + " " + offer.getSeller().getLastName());
+
+    @GetMapping("/update/{id}")
+    public String getUpdateOffer(Model model, @PathVariable String id) {
+        AddOfferDTO addOfferDTO = this.mapOfferToAddOfferDTO(this.offerService.findById(id));
+        addCommonAttributes(model);
+        model.addAttribute("offerDetails", addOfferDTO);
+        return "update";
     }
 
+    @PostMapping("/update/{id}")
+    public String postUpdateOffer(@PathVariable String id,
+                                  @Valid @ModelAttribute("addOfferDto") AddOfferDTO addOfferDTO,
+                                  BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("addOfferDto", addOfferDTO);
+            redirectAttributes.addFlashAttribute(BINDING_RESULT_PATH + "addOfferDto", bindingResult);
+            return "redirect:/offers/update/" + id;
+        }
+        this.offerService.updateOffer(addOfferDTO);
+        return "redirect:/offers/" + id;
+    }
+
+
+    @GetMapping("/delete/{id}")
+    public String postDeleteOffer(@PathVariable String id) {
+        this.offerService.deleteOffer(id);
+        return "redirect:/offers/all";
+    }
+
+    private void addCommonAttributes(Model model) {
+        model.addAttribute("brands", brandService.getAllBrands());
+        model.addAttribute("brand", new Brand());
+        model.addAttribute("engines", Engine.values());
+        model.addAttribute("engine", Engine.class);
+        model.addAttribute("transmissions", Transmission.values());
+        model.addAttribute("transmission", Transmission.class);
+    }
+
+
+    private AddOfferDTO mapOfferToAddOfferDTO(Offer offer) {
+        AddOfferDTO addOfferDTO = new AddOfferDTO();
+        addOfferDTO.setBrand(offer.getModel().getBrand().getName());
+        addOfferDTO.setPrice(offer.getPrice());
+        addOfferDTO.setEngine(offer.getEngine());
+        addOfferDTO.setMileage(offer.getMileage());
+        addOfferDTO.setTransmission(offer.getTransmission());
+        addOfferDTO.setYear(offer.getYear());
+        addOfferDTO.setDescription(offer.getDescription());
+        addOfferDTO.setImageUrl(offer.getImageUrl());
+        addOfferDTO.setId(offer.getId());
+        return addOfferDTO;
+    }
+
+
+    private OfferDetailsDTO mapOfferToOfferDetailsDTO(Offer offer) {
+        return new OfferDetailsDTO(offer.getId(), offer.getImageUrl(), offer.getModel().getBrand().getName(), offer.getModel().getName(), offer.getEngine(), offer.getPrice(), offer.getTransmission(), offer.getCreated(), offer.getModified(),
+                offer.getSeller().getFirstName() + " " + offer.getSeller().getLastName());
+    }
 }

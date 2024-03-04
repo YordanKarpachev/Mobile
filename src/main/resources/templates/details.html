@@ -20,27 +20,42 @@
                 <li class="list-group-item">
 
                     <div class="card-text"><span>• Price: <span th:text="${offerDetails.price}"></span></span></div>
-                    <div class="card-text"><span>• Engine type: <span th:text="${offerDetails.engine}"></span></span></div>
-                    <div class="card-text"><span>• Transmission type: <span th:text="${offerDetails.transmission}"></span></span></div>
-                    <div class="card-text"><span>• Offer created: <span th:text="${#dates.format(offerDetails.created, 'dd-MM-yyyy HH:mm')}"></span></span></div>
-                    <div class="card-text"><span>• Offer modified: <span th:text="${#dates.format(offerDetails.modified, 'dd-MM-yyyy HH:mm')}"></span></span></div>
-                    <div class="card-text"><span>• Seller - First and Last name: <span th:text="${offerDetails.seller}"></span></span></div>
+                    <div class="card-text"><span>• Engine type: <span th:text="${offerDetails.engine}"></span></span>
+                    </div>
+                    <div class="card-text"><span>• Transmission type: <span
+                            th:text="${offerDetails.transmission}"></span></span></div>
+                    <div class="card-text">
+                         <span>• Offer created:
+                           <span th:text="${#temporals.format(offerDetails.created, 'dd-MM-yyyy HH:mm')}"></span>
+                         </span>
+                    </div>
+
+                    <div class="card-text">
+                       <span>• Offer modified:
+                        <span th:text="${#temporals.format(offerDetails.modified, 'dd-MM-yyyy HH:mm')}"></span>
+                       </span>
+                    </div>
+                    <div class="card-text"><span>• Seller : <span th:text="${offerDetails.seller}"></span></span></div>
                 </li>
             </ul>
             <div class="card-body">
+
+
+
                 <a class="card-link" th:href="@{/offers/update/{id}(id=${offerDetails.id})}">Update</a>
                 <a class="card-link" th:href="@{/offers/delete/{id}(id=${offerDetails.id})}">Delete</a>
             </div>
         </div>
         <!-- Offer Image Card -->
         <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+            <img th:src="${offerDetails.imageUrl}" alt="Offer Image" class="card-img-top"/>
 
         </div>
     </div>
 </div>
 
 <div>
-    <footer> </footer>
+    <footer></footer>
 </div>
 
 </body>

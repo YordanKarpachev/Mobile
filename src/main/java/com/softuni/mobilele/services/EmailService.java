@@ -22,6 +22,7 @@ public class EmailService {
 
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
+
     }
 
     public void sendRegistrationEmail(String userEmail, String userName) {
@@ -30,7 +31,7 @@ public class EmailService {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         try {
-            mimeMessageHelper.setFrom("mobile@example.com");
+            mimeMessageHelper.setFrom("mobileprojectyk@gmail.com");
             mimeMessageHelper.setTo(userEmail);
             mimeMessageHelper.setSubject("Welcome to Mobile");
             mimeMessageHelper.setText(generateEmailText(userName), true);

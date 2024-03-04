@@ -1,8 +1,7 @@
 package com.softuni.mobilele.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.softuni.mobilele.domain.enums.Brands;
+import jakarta.persistence.*;
 
 import java.util.Date;
 @Entity
@@ -10,13 +9,14 @@ import java.util.Date;
 public class Brand extends BaseEntity {
 
     @Column(unique = true, nullable = false)
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private Brands name;
 
-    public String getName() {
+    public Brands getName() {
         return name;
     }
 
-    public Brand setName(String name) {
+    public Brand setName(Brands name) {
         this.name = name;
         return this;
     }

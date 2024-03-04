@@ -2,6 +2,7 @@ package com.softuni.mobilele.domain.entities;
 
 import com.softuni.mobilele.domain.enums.ModelCategory;
 import jakarta.persistence.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -30,7 +31,9 @@ public class Model extends BaseEntity {
     @Column
     private Date modified;
 
+
     @ManyToOne
+
     private Brand brand;
 
     public String getName() {

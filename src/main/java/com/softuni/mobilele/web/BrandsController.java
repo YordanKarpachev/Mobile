@@ -33,7 +33,6 @@ public class BrandsController {
     private BrandViewDTO mapToBrandView(com.softuni.mobilele.domain.entities.Model model) {
         BrandViewDTO brandViewDTO = new BrandViewDTO();
         brandViewDTO.setBrand(model.getBrand().getName());
-        brandViewDTO.setModelName(model.getName());
         brandViewDTO.setCategory(model.getCategory());
         brandViewDTO.setImageUrl(model.getImageUrl());
         brandViewDTO.setStartYear(model.getStartYear());
