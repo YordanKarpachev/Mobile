@@ -31,6 +31,10 @@ body {
 .brand-section {
      background-image: linear-gradient(to bottom right, rgba(220, 220, 220, 0.9), rgba(255, 255, 255, 0.9));
 }
+.btn-group .btn img.logo {
+  height: 50px; /* oder die gewünschte Größe */
+  width: auto;
+}
 
 td, th {
      padding: 3px 8px;

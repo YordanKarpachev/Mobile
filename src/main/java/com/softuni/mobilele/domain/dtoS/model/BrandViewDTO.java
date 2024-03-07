@@ -18,14 +18,14 @@ public class BrandViewDTO {
 
     private Integer startYear;
 
-    private Integer endYear;
+    private String endYear;
 
 
     public BrandViewDTO() {
 
     }
 
-    public BrandViewDTO(Brands brand,  String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear) {
+    public BrandViewDTO(Brands brand,  String name, ModelCategory category, String imageUrl, Integer startYear, String endYear) {
         this.brand = brand;
 
         this.name = name;
@@ -77,11 +77,11 @@ public class BrandViewDTO {
         this.startYear = startYear;
     }
 
-    public Integer getEndYear() {
+    public String getEndYear() {
         return endYear;
     }
 
-    public void setEndYear(Integer endYear) {
+    public void setEndYear(String endYear) {
         this.endYear = endYear;
     }
 

@@ -1,22 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head}">
+<head th:replace="~{fragments/head :: head}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Optional: Bootstrap Bundle with Popper.js (includes jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <title>Ihre Webseite</title>
 </head>
+
 <body>
 
 <div>
     <nav th:replace="~{fragments/navigation}"></nav>
 </div>
 
+<!-- Ihr Seiteninhalt geht hier -->
 
-<div class="container-fluid">
-    <h5 class="text-center text-white mt-5">Welcome to MobiLeLeLe</h5>
+<div class="container my-4">
+    <div class="btn-group" role="group" aria-label="Fahrzeugkategorien">
+
+        <a href="" class="btn btn-outline-secondary">
+            <img alt="car picture" th:src="@{/images/CategoryCar.png}" class="logo">
+        </a>
+
+
+        <a href="/pfad-zu-bussen" class="btn btn-outline-secondary">
+            <img th:src="@{/images/CategoryBus.png}" alt="Bus" class="logo">
+        </a>
+
+
+        <a href="/pfad-zu-lkws" class="btn btn-outline-secondary">
+            <img th:src="@{images/CategoryTruck.png}" alt="Truck" class="logo">
+        </a>
+
+
+        <a href="/pfad-zu-motorraedern" class="btn btn-outline-secondary">
+            <img th:src="@{/images/CategoryMotorcycle.png}" alt="Motorcycle" class="logo">
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <select id="brand" class="form-control">
+                <option value="">- Select a model -</option>
+                <th:block th:each="brand : ${brands}">
+                    <option th:value="${brand.name}" th:text="${brand.name}">Brand name</option>
+                </th:block>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <select id="model" class="form-control">
+                <option>Modell</option>
+
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <select class="form-control">
+                <option>Baujahr ab</option>
+                <!-- Weitere Optionen -->
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <select class="form-control">
+                <option>Kilometer bis</option>
+                <!-- Weitere Optionen -->
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <select class="form-control">
+                <option>Preis bis </option>
+                <!-- Weitere Optionen -->
+            </select>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-primary" style="background-color: #ff6f00; border: none;">
+                    <i class="fa fa-hand-pointer" style="margin-right: 10px;"></i>1.420.689 Angebote
+                </button>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <div>
-    <footer></footer>
+    <footer> </footer>
 </div>
-
+<script src="../static/js/updateModels.js" th:src="@{/js/updateModels.js}"></script>
 </body>
 </html>

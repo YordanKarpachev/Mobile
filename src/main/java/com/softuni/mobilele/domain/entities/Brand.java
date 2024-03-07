@@ -4,6 +4,8 @@ import com.softuni.mobilele.domain.enums.Brands;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
+
 @Entity
 @Table(name = "brands")
 public class Brand extends BaseEntity {
@@ -11,6 +13,22 @@ public class Brand extends BaseEntity {
     @Column(unique = true, nullable = false)
     @Enumerated(EnumType.STRING)
     private Brands name;
+
+
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
+    Set<Model> models;
+
+
+    public Brand() {
+    }
+
+    public Set<Model> getModels() {
+        return models;
+    }
+
+    public void setModels(Set<Model> models) {
+        this.models = models;
+    }
 
     public Brands getName() {
         return name;

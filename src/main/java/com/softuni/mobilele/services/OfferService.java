@@ -62,7 +62,8 @@ public class OfferService {
        offer.setYear(addOfferDTO.getYear());
        offer.setSeller(user);
 
-        Model model  = this.modelService.findModelByBrandName(addOfferDTO.getBrand().name());
+
+        Model model  = this.modelService.findModelByName(addOfferDTO.getCarModels());
     offer.setModel(model);
     offer.setCreated(LocalDateTime.now());
     offer.setModified(LocalDateTime.now());

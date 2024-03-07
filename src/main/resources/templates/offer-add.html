@@ -22,9 +22,9 @@
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" th:for="brand">Model</label>
+                <label class="text-center text-white font-weight-bold" th:for="brand">Brand</label>
 
-                <select id="model" class="form-control" th:field="*{brand}">
+                <select id="brand" class="form-control" th:field="*{brand}">
                     <option value="">- Select a model -</option>
                     <th:block th:each="brand : ${brands}">
                         <option th:value="${brand.name}" th:text="${brand.name}">Brand name</option>
@@ -33,7 +33,22 @@
 
                 <p th:if="${#fields.hasErrors('brand')}"
                    class="errors alert alert-danger">
-                    Vechicle model is required.
+                    Brand is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" th:for="brand">Model</label>
+
+                <select id="model" class="form-control" th:field="*{carModels}">
+                    <option value="">- Select a model -</option>
+                    <th:block th:each="brand : ${brands}">
+                        <option th:value="${carModels}" th:text="${carModels}">Models</option>
+                    </th:block>
+                </select>
+
+                <p th:if="${#fields.hasErrors('brand')}"
+                   class="errors alert alert-danger">
+                    Model is required.
                 </p>
             </div>
 
@@ -164,6 +179,8 @@
 <div>
     <footer> </footer>
 </div>
+
+<script type="module"  src="../static/js/addOffer.js" th:src="@{/js/addOffer.js}"></script>
 
 </body>
 </html>

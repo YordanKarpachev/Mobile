@@ -36,7 +36,7 @@ public class BrandsController {
         brandViewDTO.setCategory(model.getCategory());
         brandViewDTO.setImageUrl(model.getImageUrl());
         brandViewDTO.setStartYear(model.getStartYear());
-        brandViewDTO.setEndYear(model.getEndYear());
+        brandViewDTO.setEndYear(model.getEndYear() == null ? "present" : model.getEndYear().toString());
         brandViewDTO.setId(model.getId());
         return brandViewDTO;
 

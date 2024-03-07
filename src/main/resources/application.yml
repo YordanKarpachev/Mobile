@@ -25,11 +25,17 @@ spring:
                 format_sql: true
         defer-datasource-initialization: true
 mail:
-    host: localhost
-    port: 1025
-    username: "admin@example.com"
-    password: ""
-
+    host: in-v3.mailjet.com
+    port: 587
+    username: "886c49df72c6b28374754d15a0a844db"
+    password: "248ea8cc8074d8976e38ea7e22d697cc"
+    properties:
+        mail:
+            debug: true
+            smtp:
+                auth: true
+                starttls:
+                    enable: true
 #mobile:
 #    admin:
 #        defaultpass: ${DEFAULT_PASS:test}

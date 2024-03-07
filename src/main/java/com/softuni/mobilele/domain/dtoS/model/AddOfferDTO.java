@@ -1,6 +1,7 @@
 package com.softuni.mobilele.domain.dtoS.model;
 
 import com.softuni.mobilele.domain.enums.Brands;
+import com.softuni.mobilele.domain.enums.CarModels;
 import com.softuni.mobilele.domain.enums.Engine;
 import com.softuni.mobilele.domain.enums.Transmission;
 import jakarta.transaction.Transaction;
@@ -11,7 +12,11 @@ import java.math.BigDecimal;
 
 public class AddOfferDTO {
 
+    @NotNull
     private Brands brand;
+
+    @NotNull
+    private CarModels carModels;
 
     private Long id;
 
@@ -110,5 +115,13 @@ public class AddOfferDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public CarModels getCarModels() {
+        return carModels;
+    }
+
+    public void setCarModels(CarModels carModels) {
+        this.carModels = carModels;
     }
 }

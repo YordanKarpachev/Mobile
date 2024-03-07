@@ -2,6 +2,7 @@ package com.softuni.mobilele.domain.dtoS.model;
 
 import com.softuni.mobilele.domain.entities.Brand;
 import com.softuni.mobilele.domain.enums.Brands;
+import com.softuni.mobilele.domain.enums.CarModels;
 import com.softuni.mobilele.domain.enums.Engine;
 import com.softuni.mobilele.domain.enums.Transmission;
 
@@ -14,7 +15,7 @@ public class OfferDetailsDTO {
     private Long id;
     private Brands brandName;
 
-    private String model;
+    private CarModels model;
     private Engine engine;
 
     private BigDecimal price;
@@ -33,7 +34,7 @@ public class OfferDetailsDTO {
 
     }
 
-    public OfferDetailsDTO(Long id,String imageUrl, Brands brandName,String model, Engine engine, BigDecimal price, Transmission transmission, LocalDateTime created, LocalDateTime modified, String seller) {
+    public OfferDetailsDTO(Long id,String imageUrl, Brands brandName,CarModels model, Engine engine, BigDecimal price, Transmission transmission, LocalDateTime created, LocalDateTime modified, String seller) {
        this.id = id;
         this.imageUrl = imageUrl;
         this.model = model;
@@ -96,11 +97,11 @@ public class OfferDetailsDTO {
 
 
 
-    public String getModel() {
+    public CarModels getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public void setModel(CarModels model) {
         this.model = model;
     }
 

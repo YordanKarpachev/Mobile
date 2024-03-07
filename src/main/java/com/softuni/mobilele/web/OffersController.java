@@ -7,9 +7,11 @@ import com.softuni.mobilele.domain.dtoS.model.OfferDetailsDTO;
 import com.softuni.mobilele.domain.entities.Brand;
 import com.softuni.mobilele.domain.entities.Offer;
 import com.softuni.mobilele.domain.entities.UserEntity;
+import com.softuni.mobilele.domain.enums.CarModels;
 import com.softuni.mobilele.domain.enums.Engine;
 import com.softuni.mobilele.domain.enums.Transmission;
 import com.softuni.mobilele.services.BrandService;
+import com.softuni.mobilele.services.ModelService;
 import com.softuni.mobilele.services.OfferService;
 import com.softuni.mobilele.services.UserService;
 import jakarta.validation.Valid;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -34,8 +37,11 @@ public class OffersController {
     @Autowired
     private BrandService brandService;
 
+    @Autowired
     private final OfferService offerService;
 
+    @Autowired
+    private ModelService modelService;
 
     @Autowired
     private UserService userService;
@@ -120,6 +126,13 @@ public class OffersController {
         return "redirect:/offers/all";
     }
 
+    @GetMapping("/getModelsForBrand/{brand}")
+    public ResponseEntity<List<CarModels>> getModelsForBrand(@PathVariable String brand) {
+
+        List<CarModels> models = this.modelService.findModelsByBrandName(brand);
+        return ResponseEntity.ok(models);
+    }
+
     private void addCommonAttributes(Model model) {
         model.addAttribute("brands", brandService.getAllBrands());
         model.addAttribute("brand", new Brand());
@@ -146,7 +159,8 @@ public class OffersController {
 
 
     private OfferDetailsDTO mapOfferToOfferDetailsDTO(Offer offer) {
-        return new OfferDetailsDTO(offer.getId(), offer.getImageUrl(), offer.getModel().getBrand().getName(), offer.getModel().getName(), offer.getEngine(), offer.getPrice(), offer.getTransmission(), offer.getCreated(), offer.getModified(),
+       return new OfferDetailsDTO(offer.getId(), offer.getImageUrl(), offer.getModel().getBrand().getName(), offer.getModel().getName(), offer.getEngine(), offer.getPrice(), offer.getTransmission(), offer.getCreated(), offer.getModified(),
                 offer.getSeller().getFirstName() + " " + offer.getSeller().getLastName());
+
     }
 }

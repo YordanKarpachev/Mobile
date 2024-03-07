@@ -1,9 +1,11 @@
 package com.softuni.mobilele.domain.entities;
 
+import com.softuni.mobilele.domain.enums.CarModels;
 import com.softuni.mobilele.domain.enums.ModelCategory;
 import jakarta.persistence.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -11,7 +13,8 @@ import java.util.Date;
 public class Model extends BaseEntity {
 
     @Column
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private CarModels name;
 
     @Enumerated(EnumType.STRING)
     private ModelCategory category;
@@ -19,28 +22,28 @@ public class Model extends BaseEntity {
     @Column
     private String imageUrl;
 
-    @Column
+    @Column(nullable = false)
     private Integer startYear;
 
     @Column
     private Integer endYear;
 
-    @Column
-    private Date created;
+    @Column(nullable = false)
+    private LocalDateTime created;
 
     @Column
-    private Date modified;
+    private LocalDateTime modified;
 
 
-    @ManyToOne
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    public String getName() {
+    public CarModels getName() {
         return name;
     }
 
-    public Model setName(String name) {
+    public Model setName(CarModels name) {
         this.name = name;
         return this;
     }
@@ -81,20 +84,20 @@ public class Model extends BaseEntity {
         return this;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public Model setCreated(Date created) {
+    public Model setCreated(LocalDateTime created) {
         this.created = created;
         return this;
     }
 
-    public Date getModified() {
+    public LocalDateTime getModified() {
         return modified;
     }
 
-    public Model setModified(Date modified) {
+    public Model setModified(LocalDateTime modified) {
         this.modified = modified;
         return this;
     }
