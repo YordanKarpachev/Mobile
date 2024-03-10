@@ -28,14 +28,20 @@ public class OfferDetailsDTO {
 
     private String seller;
 
+    private  String sellerEmail;
 
     private String imageUrl;
+
+    private String description;
+
+
     public OfferDetailsDTO( ) {
 
     }
 
-    public OfferDetailsDTO(Long id,String imageUrl, Brands brandName,CarModels model, Engine engine, BigDecimal price, Transmission transmission, LocalDateTime created, LocalDateTime modified, String seller) {
-       this.id = id;
+    public OfferDetailsDTO(String sellerEmail ,Long id,String imageUrl, Brands brandName,CarModels model, Engine engine, BigDecimal price, Transmission transmission, LocalDateTime created, LocalDateTime modified, String seller, String description) {
+       this.sellerEmail = sellerEmail;
+        this.id = id;
         this.imageUrl = imageUrl;
         this.model = model;
         this.brandName = brandName;
@@ -45,6 +51,7 @@ public class OfferDetailsDTO {
         this.created = created;
         this.modified = modified;
         this.seller = seller;
+        this.description = description;
     }
 
     public Engine getEngine() {
@@ -127,5 +134,21 @@ public class OfferDetailsDTO {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSellerEmail() {
+        return sellerEmail;
+    }
+
+    public void setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail;
     }
 }

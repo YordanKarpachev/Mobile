@@ -55,6 +55,8 @@ public class RegistrationController {
 
     this.userService.registerUser(userRegisterInfo);
     this.emailService.sendRegistrationEmail(userRegisterInfo.getEmail(), userRegisterInfo.getFirstName() + userRegisterInfo.getLastName());
+        redirectAttributes.addFlashAttribute("firstName", userRegisterInfo.getFirstName());
+        redirectAttributes.addFlashAttribute("lastName", userRegisterInfo.getLastName());
         return "redirect:/users/login";
     }
 

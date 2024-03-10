@@ -12,8 +12,8 @@
     <h2 class="text-center text-white mt-5">Details</h2>
     <div class="offers row mx-auto d-flex flex-row justify-content-center">
         <!-- Offer Details Card -->
-        <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0" th:object="${offerDetails}">
-            <div class="card-body pb-1">
+        <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0" th:object="${offerDetails}"  style="background-color: rgba(255, 255, 255, 0.1); color: black; text-shadow: 1px 1px 2px white;">
+            <div class="card-body pb-1"  >
                 <h5 class="card-title" th:text="*{brandName}"></h5>
             </div>
             <ul class="offer-details list-group list-group-flush">
@@ -38,24 +38,29 @@
                     <div class="card-text"><span>• Seller : <span th:text="${offerDetails.seller}"></span></span></div>
                 </li>
             </ul>
+            <ul class="offer-details list-group list-group-flush">
+
+                <li class="list-group-item">
+                    <div class="card-text"><span>• Description: <span th:text="${offerDetails.description}">Default Description</span></span></div>
+                </li>
+            </ul>
             <div class="card-body">
+                <div th:if="${offerDetails.sellerEmail == #authentication.name}">
+                    <a class="card-link" th:href="@{/offers/update/{id}(id=${offerDetails.id})}">Update</a>
+                    <a class="card-link" th:href="@{/offers/delete/{id}(id=${offerDetails.id})}">Delete</a>
+                </div>
 
-
-
-                <a class="card-link" th:href="@{/offers/update/{id}(id=${offerDetails.id})}">Update</a>
-                <a class="card-link" th:href="@{/offers/delete/{id}(id=${offerDetails.id})}">Delete</a>
             </div>
         </div>
         <!-- Offer Image Card -->
         <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
-            <img th:src="${offerDetails.imageUrl}" alt="Offer Image" class="card-img-top"/>
+            <img th:src="${offerDetails.imageUrl}" alt="Offer Image" class="card-img-top" style="width: 100%; height: 400px; object-fit: cover;"/>
 
         </div>
     </div>
 </div>
 
-<div>
-    <footer></footer>
+<div th:include="~{fragments/footer}">
 </div>
 
 </body>

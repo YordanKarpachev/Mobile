@@ -17,16 +17,6 @@ public class ModelService {
     private ModelRepository modelRepository;
 
 
-    public Model findModelByBrandName(String brand) {
-
-        Brands brandEnum = Brands.valueOf(brand);
-
-
-        return this.modelRepository.findByBrand_Name(brandEnum);
-
-
-    }
-
     public List<CarModels> findModelsByBrandName(String brand) {
 
         Brands brandEnum = Brands.valueOf(brand);

@@ -2,6 +2,10 @@ package com.softuni.mobilele.domain.dtoS.model;
 
 
 
+import com.softuni.mobilele.domain.entities.Brand;
+import com.softuni.mobilele.domain.enums.Brands;
+import com.softuni.mobilele.domain.enums.CarModels;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -25,11 +29,14 @@ public class AllOffersDTO {
 
     private Integer year;
 
-    private String brandName;
+    private Brands brandName;
 
-    private String modelName;
+    private CarModels modelName;
 
-    public AllOffersDTO(Long id, String description, String engine, String imageUrl, Integer mileage, BigDecimal price, String transmission, Integer year) {
+    private String sellerEmail;
+
+    public AllOffersDTO(String sellerEmail, Long id, String description, String engine, String imageUrl, Integer mileage, BigDecimal price, String transmission, Integer year, Brands brandName, CarModels modelName) {
+      this.sellerEmail = sellerEmail;
        this.id = id;
         this.description = description;
         this.engine = engine;
@@ -98,19 +105,19 @@ public class AllOffersDTO {
         this.year = year;
     }
 
-    public String getBrandName() {
+    public Brands getBrandName() {
         return brandName;
     }
 
-    public void setBrandName(String brandName) {
+    public void setBrandName(Brands brandName) {
         this.brandName = brandName;
     }
 
-    public String getModelName() {
+    public CarModels getModelName() {
         return modelName;
     }
 
-    public void setModelName(String modelName) {
+    public void setModelName(CarModels modelName) {
         this.modelName = modelName;
     }
 
@@ -120,5 +127,13 @@ public class AllOffersDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getSellerEmail() {
+        return sellerEmail;
+    }
+
+    public void setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail;
     }
 }

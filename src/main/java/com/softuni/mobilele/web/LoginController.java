@@ -2,10 +2,8 @@ package com.softuni.mobilele.web;
 
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -14,11 +12,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LoginController {
 
     @GetMapping("/login")
-    public String getLogin(){
+    public String getLogin(Model model) {
+        if (model.containsAttribute("firstName") && model.containsAttribute("lastName")) {
+            String firstName = (String) model.asMap().get("firstName");
+            String lastName = (String) model.asMap().get("lastName");
+            model.addAttribute("welcomeMessage", "Welcome, " + firstName + " " + lastName + "! You have successfully registered. Please sign in to continue.");
+        }
         return "auth-login";
     }
 
-    @PostMapping("/users/login-error")
+    @PostMapping("/login-error")
     public String onFailedLogin(
             @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
             RedirectAttributes redirectAttributes) {
@@ -27,5 +30,6 @@ public class LoginController {
 
         return "redirect:/users/login";
     }
+
 
 }

@@ -4,7 +4,7 @@
 <head th:replace="~{fragments/head}">
 </head>
 
-<body>
+<body style="position: relative; min-height: 100vh;">
 
 <div>
     <nav th:replace="~{fragments/navigation}"></nav>
@@ -19,19 +19,33 @@
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="model">Model</label>
+                <label class="text-center text-white font-weight-bold" th:for="brand">Brand</label>
 
-                <select id="model" class="form-control" th:field="*{brand}">
+                <select id="brand" class="form-control" th:field="*{brand}">
                     <option value="">- Select a model -</option>
                     <th:block th:each="brand : ${brands}">
                         <option th:value="${brand.name}" th:text="${brand.name}">Brand name</option>
                     </th:block>
                 </select>
 
+                <p th:if="${#fields.hasErrors('brand')}"
+                   class="errors alert alert-danger">
+                    Brand is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" th:for="brand">Model</label>
+
+                <select id="model" class="form-control" th:field="*{carModels}">
+                    <option value="">- Select a model -</option>
+                    <th:block th:each="model : ${T(com.softuni.mobilele.domain.enums.CarModels).values()}">
+                        <option th:value="${model}" th:text="${model}">Model</option>
+                    </th:block>
+                </select>
 
                 <p th:if="${#fields.hasErrors('brand')}"
                    class="errors alert alert-danger">
-                    Vechicle model is required.
+                    Model is required.
                 </p>
             </div>
 
@@ -160,9 +174,12 @@
     </form>
 </div>
 
-<div>
-    <footer></footer>
+<div th:include="~{fragments/footer}">
+
 </div>
+<script type="module"  th:src="@{/js/offers.js}" >
+
+</script>
 
 </body>
 </html>

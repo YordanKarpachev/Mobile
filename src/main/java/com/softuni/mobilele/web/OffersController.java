@@ -71,7 +71,7 @@ public class OffersController {
 
     @GetMapping("/add")
     public String getAddOffer(Model model) {
-        addCommonAttributes(model);
+        prepareOfferModel(model, new AddOfferDTO());
         return "offer-add";
     }
 
@@ -79,8 +79,8 @@ public class OffersController {
     public String postAddOffer(@Valid @ModelAttribute(name = "addOfferDto") AddOfferDTO addOfferDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes,
-                               @AuthenticationPrincipal UserDetails prncipal) {
-        UserEntity user = this.userService.findUserEntityByUsername(prncipal.getUsername());
+                               @AuthenticationPrincipal UserDetails principal) {
+        UserEntity user = this.userService.findUserEntityByUsername(principal.getUsername());
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addOfferDto", addOfferDTO)
                     .addFlashAttribute(BINDING_RESULT_PATH + "addOfferDto", bindingResult);
@@ -101,8 +101,7 @@ public class OffersController {
     @GetMapping("/update/{id}")
     public String getUpdateOffer(Model model, @PathVariable String id) {
         AddOfferDTO addOfferDTO = this.mapOfferToAddOfferDTO(this.offerService.findById(id));
-        addCommonAttributes(model);
-        model.addAttribute("offerDetails", addOfferDTO);
+        prepareOfferModel(model, addOfferDTO);
         return "update";
     }
 
@@ -119,6 +118,18 @@ public class OffersController {
         return "redirect:/offers/" + id;
     }
 
+    @GetMapping("/my")
+    public String getMyOffers(Model model, @PageableDefault(
+            sort = "offerId",
+            size = 4
+    ) Pageable pageable, @AuthenticationPrincipal UserDetails principal) {
+
+        Page<AllOffersDTO> allOffersDTOS = this.offerService.findAllBySeller(pageable, principal.getUsername());
+        model.addAttribute("dtos", allOffersDTOS);
+        model.addAttribute("myOffers", "My offers");
+        return "offers";
+    }
+
 
     @GetMapping("/delete/{id}")
     public String postDeleteOffer(@PathVariable String id) {
@@ -126,11 +137,17 @@ public class OffersController {
         return "redirect:/offers/all";
     }
 
-    @GetMapping("/getModelsForBrand/{brand}")
+    @GetMapping("/brands/{brand}/models")
     public ResponseEntity<List<CarModels>> getModelsForBrand(@PathVariable String brand) {
 
         List<CarModels> models = this.modelService.findModelsByBrandName(brand);
         return ResponseEntity.ok(models);
+    }
+
+
+    private void prepareOfferModel(Model model, AddOfferDTO addOfferDTO) {
+        addCommonAttributes(model);
+        model.addAttribute("offerDetails", addOfferDTO);
     }
 
     private void addCommonAttributes(Model model) {
@@ -154,13 +171,14 @@ public class OffersController {
         addOfferDTO.setDescription(offer.getDescription());
         addOfferDTO.setImageUrl(offer.getImageUrl());
         addOfferDTO.setId(offer.getId());
+        addOfferDTO.setCarModels(offer.getModel().getName());
         return addOfferDTO;
     }
 
 
     private OfferDetailsDTO mapOfferToOfferDetailsDTO(Offer offer) {
-       return new OfferDetailsDTO(offer.getId(), offer.getImageUrl(), offer.getModel().getBrand().getName(), offer.getModel().getName(), offer.getEngine(), offer.getPrice(), offer.getTransmission(), offer.getCreated(), offer.getModified(),
-                offer.getSeller().getFirstName() + " " + offer.getSeller().getLastName());
+       return new OfferDetailsDTO(offer.getSeller().getEmail(), offer.getId(), offer.getImageUrl(), offer.getModel().getBrand().getName(), offer.getModel().getName(), offer.getEngine(), offer.getPrice(), offer.getTransmission(), offer.getCreated(), offer.getModified(),
+                offer.getSeller().getFirstName() + " " + offer.getSeller().getLastName(), offer.getDescription());
 
     }
 }
