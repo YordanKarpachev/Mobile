@@ -63,8 +63,9 @@ public class OffersController {
     public String getAllOffers(Model model, @PageableDefault(
             sort = "offerId",
             size = 4
-    ) Pageable pageable) {
-        Page<AllOffersDTO> allOffersDTOS = this.offerService.getAllOffersDTOS(pageable);
+    ) Pageable pageable, @AuthenticationPrincipal UserDetails user ) {
+
+        Page<AllOffersDTO> allOffersDTOS = this.offerService.getAllOffersDTOS(pageable , user);
         model.addAttribute("dtos", allOffersDTOS);
         return "offers";
     }
@@ -86,7 +87,7 @@ public class OffersController {
                     .addFlashAttribute(BINDING_RESULT_PATH + "addOfferDto", bindingResult);
             return "redirect:/offers/add";
         }
-        this.offerService.saveOffer(addOfferDTO, user);
+      this.offerService.saveOffer(addOfferDTO, user);
         return "redirect:/offers/all";
     }
 
@@ -169,7 +170,7 @@ public class OffersController {
         addOfferDTO.setTransmission(offer.getTransmission());
         addOfferDTO.setYear(offer.getYear());
         addOfferDTO.setDescription(offer.getDescription());
-        addOfferDTO.setImageUrl(offer.getImageUrl());
+
         addOfferDTO.setId(offer.getId());
         addOfferDTO.setCarModels(offer.getModel().getName());
         return addOfferDTO;

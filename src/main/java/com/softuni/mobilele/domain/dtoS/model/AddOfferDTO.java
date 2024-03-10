@@ -7,6 +7,7 @@ import com.softuni.mobilele.domain.enums.Transmission;
 import jakarta.transaction.Transaction;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -38,8 +39,9 @@ public class AddOfferDTO {
     @NotNull
     private String description;
 
-    @NotNull
     private String imageUrl;
+
+    private MultipartFile img;
 
 
     public AddOfferDTO() {
@@ -101,13 +103,7 @@ public class AddOfferDTO {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public Long getId() {
         return id;
@@ -123,5 +119,21 @@ public class AddOfferDTO {
 
     public void setCarModels(CarModels carModels) {
         this.carModels = carModels;
+    }
+
+    public MultipartFile getImg() {
+        return img;
+    }
+
+    public void setImg(MultipartFile img) {
+        this.img = img;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

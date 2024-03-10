@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -48,6 +49,10 @@ public class Offer extends BaseEntity {
 
     @ManyToOne
     private UserEntity seller;
+
+    @OneToMany(mappedBy = "offer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+    private Set<Picture> pictures;
 
     public String getDescription() {
         return description;
@@ -152,5 +157,13 @@ public class Offer extends BaseEntity {
 
     public void setModified(LocalDateTime modified) {
         this.modified = modified;
+    }
+
+    public Set<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
     }
 }

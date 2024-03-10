@@ -14,6 +14,7 @@
 <div class="container" style="padding-bottom: 70px;  overflow-auto;">
     <h2 class="text-center text-white">Upload Offer</h2>
     <form th:method="POST"
+          enctype="multipart/form-data"
           th:action="@{/offers/add}"
           th:object="${addOfferDto}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
@@ -155,18 +156,22 @@
                 Description is required.
             </p>
         </div>
-        <div class="form-group">
-            <label class="text-white font-weight-bold" th:for="imageUrl">Image URL</label>
-            <input id="imageUrl" type="url" class="form-control"
-                   placeholder="Put vehicle image URL here"
-                   th:field="*{imageUrl}"
-            >
 
-            <p th:if="${#fields.hasErrors('imageUrl')}"
-               class="errors alert alert-danger">
-                Vehicle image URL is required.
-            </p>
+
+        <div>
+        <div class="form-group">
+            <label for="img" class="col-form-label ">Images</label>
         </div>
+        <div class="form-group">
+            <input type="file" name="img"
+                   required
+                   id="img"
+                   class="form-control-file"
+                   aria-describedby="inputGpxError">
+            <small id="inputGpxError"
+                   class="invalid-feedback  form-text bg-danger rounded">Must be valid image</small>
+        </div>
+    </div>
 
         <div class="row">
             <div class="col col-md-4">

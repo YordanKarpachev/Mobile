@@ -10,21 +10,26 @@
 </div>
 
 <div class="container-fluid">
-    <h2 class="text-center text-white mt-5">Car brand: <span th:text="${brandName}"></span></h2>
+    <h2 class="text-center text-white mt-5">Car brands: <span th:text="${brandName}">
+    </span>
+
+
+
+
+
+    </h2>
     <div th:if="${models != null}" th:each="model : ${models}" class="row mx-auto d-flex flex-row justify-content-center">
         <div class="card col-sm-2 col-md-3 col-lg-4 m-1 p-0">
             <img th:src="${model.imageUrl}" class="card-img-top" alt="Model image">
             <div class="card-body">
                 <h5 class="card-title" th:text="${model.brand.name}"></h5>
+                <h5 class="card-title" th:text="${model.name}"></h5>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" th:text="'Category: ' + ${model.category}"></li>
                     <li class="list-group-item" th:text="'Start Year: ' + ${model.startYear}"></li>
                     <li class="list-group-item" th:text="'End Year: ' + ${model.endYear}"></li>
                 </ul>
-                <div class="card-body">
-                    <a th:href="@{/offers/update/{id}(id=${model.id})}" class="card-link">Update</a>
-                    <a th:href="@{/offers/delete/{id}(id=${model.id})}" class="card-link">Delete</a>
-                </div>
+
             </div>
         </div>
     </div>

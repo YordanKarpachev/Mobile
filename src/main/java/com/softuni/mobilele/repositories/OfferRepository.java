@@ -42,5 +42,8 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
 
     Page<Offer>  findAllBySellerEmail(String email, Pageable pageable);
 
+    @Query("SELECT o FROM Offer o ORDER BY CASE WHEN o.seller.email = :email THEN 0 ELSE 1 END, o.id")
+    Page<Offer> findAllSortedBySellerEmail(@Param("email") String email, Pageable pageable);
+
 
 }

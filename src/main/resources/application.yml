@@ -2,8 +2,12 @@ spring:
     datasource:
         driverClassName: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/mobilele?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-        username: ${MYSQL_USERNAME:root}
-        password: ${MYSQL_PASSWORD:123456}
+        username: ${MYSQL_USERNAME}
+        password: ${MYSQL_PASSWORD}
+    servlet:
+        multipart:
+            max-file-size: 1MB
+            max-request-size: 5MB
     mvc:
         hiddenmethod:
             filter:
@@ -27,8 +31,8 @@ spring:
 mail:
     host: in-v3.mailjet.com
     port: 587
-    username: "886c49df72c6b28374754d15a0a844db"
-    password: "248ea8cc8074d8976e38ea7e22d697cc"
+    username: ${MAIL_API_KEY}
+    password: ${MAIL_API_SECRET}
     properties:
         mail:
             debug: true

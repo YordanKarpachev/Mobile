@@ -1,9 +1,6 @@
 package com.softuni.mobilele;
 
-import com.softuni.mobilele.domain.entities.Brand;
-import com.softuni.mobilele.domain.entities.Model;
-import com.softuni.mobilele.domain.entities.Offer;
-import com.softuni.mobilele.domain.entities.UserEntity;
+import com.softuni.mobilele.domain.entities.*;
 import com.softuni.mobilele.domain.enums.*;
 import com.softuni.mobilele.repositories.BrandRepository;
 import com.softuni.mobilele.repositories.ModelRepository;
@@ -18,6 +15,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -164,6 +162,9 @@ public class seedOffers implements CommandLineRunner {
     }
 
     private Offer createOffer(Model model, BigDecimal price, int year, int mileage, UserEntity seller, Engine engine, String description, String imageUrl, Transmission transmission) {
+
+
+
         Offer offer = new Offer();
         offer.setModel(model);
         offer.setPrice(price);
@@ -172,9 +173,15 @@ public class seedOffers implements CommandLineRunner {
         offer.setSeller(seller);
         offer.setEngine(engine);
         offer.setDescription(description);
-        offer.setImageUrl(imageUrl);
         offer.setTransmission(transmission);
         offer.setCreated(LocalDateTime.now());
+
+        Picture picture = new Picture();
+        picture.setUrl(imageUrl);
+        picture.setOffer(offer);
+        picture.setAuthor(seller);
+        offer.setPictures(Collections.singleton(picture));
+
         return offer;
     }
 

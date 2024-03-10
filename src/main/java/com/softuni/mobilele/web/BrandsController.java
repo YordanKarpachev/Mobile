@@ -38,6 +38,7 @@ public class BrandsController {
         brandViewDTO.setStartYear(model.getStartYear());
         brandViewDTO.setEndYear(model.getEndYear() == null ? "present" : model.getEndYear().toString());
         brandViewDTO.setId(model.getId());
+        brandViewDTO.setName(model.getName());
         return brandViewDTO;
 
     }
