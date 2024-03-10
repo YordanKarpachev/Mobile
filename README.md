@@ -1,3 +1,2 @@
 # Mobile
-Dies ist ein Spring-Projekt mit Lernzwecken, das letztendlich wie eine Internetseite für den Autoverkauf aussehen soll. Nutzer können sich registrieren und erhalten eine E-Mail mit einem Link zur Aktivierung. Selbstverständlich ist es möglich, sich als Administrator oder Moderator anzumelden. Man kann Fahrzeuge zum Verkauf anbieten, eigene Angebote löschen oder bearbeiten und Bilder hinzufügen. Nicht angemeldete Benutzer sehen nur die Anmelde- und Registrierungsoptionen, während angemeldete Benutzer sich ausloggen können und Autos hinzufügen können, usw.
-Um das Projekt zu nutzen, sollte man vorerst MailHog lokal installieren.
+This project is a Spring-based learning showcase, emulating an online car sales portal. Features include user registration, vehicle listings, admin and moderator roles, and image uploads. It demonstrates user authentication, authorization, and CRUD operations on car sales listings.
