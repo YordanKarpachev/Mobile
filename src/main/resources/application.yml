@@ -22,12 +22,12 @@ spring:
         #    #For MySQL 5
         #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
         hibernate:
-            ddl-auto: none
+            ddl-auto: update
         open-in-view: false
         properties:
             hibernate:
                 format_sql: true
-        defer-datasource-initialization: true
+        defer-datasource-initialization: false
 mail:
     host: in-v3.mailjet.com
     port: 587
