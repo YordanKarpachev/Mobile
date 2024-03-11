@@ -39,6 +39,7 @@ public class seedOffers implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+/*
 
         if(this.userRepository.count() == 0){
             seedUsers();
@@ -55,6 +56,7 @@ public class seedOffers implements CommandLineRunner {
         if(this.offerRepository.count() == 0){
             seedOffers();
         }
+*/
 
     }
 
