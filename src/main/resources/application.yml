@@ -1,9 +1,9 @@
 spring:
     datasource:
         driverClassName: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/mobilele?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-        username: root
-        password: 123456
+        url: ${DATASOURCE_URL}
+        username: ${DATASOURCE_USERNAME}
+        password: ${DATASOURCE_PASSWORD}
     servlet:
         multipart:
             max-file-size: 1MB
@@ -22,7 +22,7 @@ spring:
         #    #For MySQL 5
         #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
         hibernate:
-            ddl-auto: create-drop
+            ddl-auto: update
         open-in-view: false
         properties:
             hibernate:
