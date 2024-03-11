@@ -4,8 +4,42 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
  updateModels('brand', 'model', '/offers/brands/' );
+ const modelSelect = document.getElementById('model');
+ if(modelSelect.value){
+    updateYearOptions(modelSelect.value);
+ }
+
+
+ const fileInput = document.getElementById('img');
+ const fileNameDisplay = document.getElementById('fileNameDisplay');
+ fileInput.addEventListener('change', function() {
+     if(this.files.length > 0) {
+         fileNameDisplay.textContent = `Selected file: ${this.files[0].name}`;
+     } else {
+         fileNameDisplay.textContent = '';
+     }
+ });
+
+
+
 
 });
+
+document.addEventListener('DOMContentLoaded', function(){
+   
+
+   
+    const fileInput = document.getElementById('img');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    fileInput.addEventListener('change', function() {
+        if(this.files.length > 0) {
+            fileNameDisplay.textContent = `Selected file: ${this.files[0].name}`;
+        } else {
+            fileNameDisplay.textContent = '';
+        }
+    });
+});
+
 
 
 
@@ -33,19 +67,23 @@ function updateModels(brandSelectId, modelSelectId, endpointBase) {
                     modelSelect.appendChild(option);
                 });
 
-                    updateYear();
+                updateYearOptions();
             })
             .catch(error => console.error('Error fetching models:', error));
     });
+
+    modelSelect.addEventListener('change', function(){
+        updateYearOptions(this.value);
+    });
 }
 
-export function updateYear(){
-    const modelSelect = document.getElementById('model');
- 
-    modelSelect.addEventListener('change', function(){
-    
-    const selectedModel = modelSelect.value;
-    
+export function updateYearOptions(selectedModel){
+  
+    if (!selectedModel) {
+        return;
+    }
+  
+
 
 
     fetch(`/api/getModelStartYear/${encodeURIComponent(selectedModel)}`)
@@ -71,5 +109,4 @@ export function updateYear(){
 
         .catch(error => console.error('Error fetching model start year:', error));
     
-})
 }

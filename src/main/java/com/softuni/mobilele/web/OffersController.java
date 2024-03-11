@@ -156,6 +156,8 @@ public class OffersController {
         model.addAttribute("brand", new Brand());
         model.addAttribute("engines", Engine.values());
         model.addAttribute("engine", Engine.class);
+        model.addAttribute("carModels", CarModels.values());
+        model.addAttribute("carModel", CarModels.class);
         model.addAttribute("transmissions", Transmission.values());
         model.addAttribute("transmission", Transmission.class);
     }

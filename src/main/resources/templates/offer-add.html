@@ -41,8 +41,8 @@
 
                 <select id="model" class="form-control" th:field="*{carModels}">
                     <option value="">- Select a model -</option>
-                    <th:block th:each="brand : ${brands}">
-                        <option th:value="${carModels}" th:text="${carModels}">Models</option>
+                    <th:block th:each="model : ${carModels}">
+                        <option th:value="${model}" th:text="${model}">Model</option>
                     </th:block>
                 </select>
 
@@ -159,18 +159,13 @@
 
 
         <div>
-        <div class="form-group">
-            <label for="img" class="col-form-label ">Images</label>
-        </div>
-        <div class="form-group">
-            <input type="file" name="img"
-                   required
-                   id="img"
-                   class="form-control-file"
-                   aria-describedby="inputGpxError">
-            <small id="inputGpxError"
-                   class="invalid-feedback  form-text bg-danger rounded">Must be valid image</small>
-        </div>
+            <div class="form-group">
+                <label for="img" class="col-form-label ">Images</label>
+                <input type="file" name="img" required id="img" class="form-control-file" aria-describedby="inputGpxError">
+                <small id="inputGpxError" class="invalid-feedback form-text bg-danger rounded">Must be valid image</small>
+
+                <div id="fileNameDisplay" class="mt-2 text-white"></div>
+            </div>
     </div>
 
         <div class="row">
