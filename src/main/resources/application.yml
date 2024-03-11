@@ -2,8 +2,8 @@ spring:
     datasource:
         driverClassName: com.mysql.cj.jdbc.Driver
         url: ${MYSQL_URL}
-        username: ${MYSQLUSER}
-        password: ${MYSQLPASSWORD}
+        username: ${MYSQL_USERNAME}
+        password: ${MYSQL_PASSWORD}
     servlet:
         multipart:
             max-file-size: 1MB
@@ -22,7 +22,7 @@ spring:
         #    #For MySQL 5
         #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
         open-in-view: false
         properties:
             hibernate:
