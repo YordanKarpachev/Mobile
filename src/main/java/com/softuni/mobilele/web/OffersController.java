@@ -178,7 +178,7 @@ public class OffersController {
 
 
     private OfferDetailsDTO mapOfferToOfferDetailsDTO(Offer offer) {
-       return new OfferDetailsDTO(offer.getSeller().getEmail(), offer.getId(), offer.getImageUrl(), offer.getModel().getBrand().getName(), offer.getModel().getName(), offer.getEngine(), offer.getPrice(), offer.getTransmission(), offer.getCreated(), offer.getModified(),
+       return new OfferDetailsDTO(offer.getSeller().getEmail(), offer.getId(), offer.getPictures().stream().findFirst().get().getUrl(), offer.getModel().getBrand().getName(), offer.getModel().getName(), offer.getEngine(), offer.getPrice(), offer.getTransmission(), offer.getCreated(), offer.getModified(),
                 offer.getSeller().getFirstName() + " " + offer.getSeller().getLastName(), offer.getDescription());
 
     }
