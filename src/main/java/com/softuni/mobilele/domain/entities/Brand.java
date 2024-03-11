@@ -13,7 +13,7 @@ public class Brand extends BaseEntity {
     @Column(unique = true, nullable = false)
     @Enumerated(EnumType.STRING)
     private Brands name;
-
+// test
 
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
     Set<Model> models;
