@@ -1,13 +1,9 @@
 spring:
     datasource:
         driverClassName: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://mysql://root:AoaFzjfQBJGoQwhmDxGILsJnRmZqhixr@mysql.railway.internal:3306/railway
-
-
-
-
-        username: ${MYSQL_USERNAME}
-        password: ${MYSQL_PASSWORD}
+        url: ${DATASOURCE_URL}
+        username: ${DATASOURCE_USERNAME}
+        password: ${DATASOURCE_PASSWORD}
     servlet:
         multipart:
             max-file-size: 1MB
