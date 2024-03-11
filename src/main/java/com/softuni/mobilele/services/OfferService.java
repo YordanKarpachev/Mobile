@@ -41,9 +41,14 @@ public class OfferService {
 
 
     public Page<AllOffersDTO> getAllOffersDTOS(Pageable pageable, UserDetails userDetails) {
-        String sellerEmail = userDetails.getUsername();
-        return this.offerRepository.findAllSortedBySellerEmail(sellerEmail, pageable)
-                .map(this::map);
+        if (userDetails != null) {
+            String sellerEmail = userDetails.getUsername();
+            return this.offerRepository.findAllSortedBySellerEmail(sellerEmail, pageable)
+                    .map(this::map);
+        } else {
+            return this.offerRepository.findAll(pageable)
+                    .map(this::map);
+        }
     }
 
 

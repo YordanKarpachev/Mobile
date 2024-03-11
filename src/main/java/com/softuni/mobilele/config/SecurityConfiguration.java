@@ -45,6 +45,7 @@ public class SecurityConfiguration {
                         "/users/register",
                         "/users/login-error",
                         "/brands/all",
+                        "/offers/all",
                         "/api/**",
                         "/offers/brands/**",
                         "/offers/all"
