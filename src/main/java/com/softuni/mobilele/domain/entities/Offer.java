@@ -35,7 +35,7 @@ public class Offer extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Transmission transmission;
 
-    @Column
+    @Column(name = "model_year")
     private Integer year;
 
     @Column
