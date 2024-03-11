@@ -3,15 +3,16 @@ package com.softuni.mobilele.domain.dtoS.model;
 import com.softuni.mobilele.domain.enums.Brands;
 import com.softuni.mobilele.domain.enums.CarModels;
 import com.softuni.mobilele.domain.enums.ModelCategory;
+import com.softuni.mobilele.domain.enums.Transmission;
 
 public class BrandViewDTO {
 
 
     private Long id;
-    private Brands brand;
+    private Brands brandName;
 
 
-    private CarModels name;
+    private CarModels modelName;
 
     private ModelCategory category;
 
@@ -22,36 +23,33 @@ public class BrandViewDTO {
     private String endYear;
 
 
+
+
     public BrandViewDTO() {
 
     }
 
-    public BrandViewDTO(Brands brand,  CarModels name, ModelCategory category, String imageUrl, Integer startYear, String endYear) {
-        this.brand = brand;
+    public BrandViewDTO( Brands brand, CarModels modelName, ModelCategory category, String imageUrl, Integer startYear, String endYear) {
+        this.brandName = brand;
 
-        this.name = name;
+
+        this.modelName = modelName;
         this.category = category;
         this.imageUrl = imageUrl;
         this.startYear = startYear;
         this.endYear = endYear;
     }
 
-    public Brands getBrand() {
-        return brand;
+
+
+
+
+    public CarModels getModelName() {
+        return modelName;
     }
 
-    public void setBrand(Brands brand) {
-        this.brand = brand;
-    }
-
-
-
-    public CarModels getName() {
-        return name;
-    }
-
-    public void setName(CarModels name) {
-        this.name = name;
+    public void setModelName(CarModels modelName) {
+        this.modelName = modelName;
     }
 
     public ModelCategory getCategory() {
@@ -93,4 +91,14 @@ public class BrandViewDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Brands getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(Brands brandName) {
+        this.brandName = brandName;
+    }
+
+
 }

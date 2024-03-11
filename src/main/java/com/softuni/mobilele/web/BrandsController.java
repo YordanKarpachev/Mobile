@@ -2,16 +2,16 @@ package com.softuni.mobilele.web;
 
 import com.softuni.mobilele.domain.dtoS.model.BrandViewDTO;
 
-import com.softuni.mobilele.domain.entities.Brand;
 import com.softuni.mobilele.repositories.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Pageable;
 
 @Controller
 @RequestMapping("/brands")
@@ -21,24 +21,27 @@ public class BrandsController {
 
 
     @GetMapping("/all")
-    private String getAllBrands(Model model) {
+    public String getAllOffers(org.springframework.ui.Model model, @PageableDefault(
 
-        List<BrandViewDTO> models = this.modelRepository.findAll().stream().map(this::mapToBrandView).collect(Collectors.toList());
-
-        model.addAttribute("models", models);
-
+            size = 4
+    ) Pageable pageable){
+        Page<BrandViewDTO> allModels = this.modelRepository.findAll(pageable).map(this::mapToBrandView);
+        model.addAttribute("dtos", allModels);
         return "brands";
     }
 
-    private BrandViewDTO mapToBrandView(com.softuni.mobilele.domain.entities.Model model) {
+
+
+                               private BrandViewDTO mapToBrandView(com.softuni.mobilele.domain.entities.Model model) {
         BrandViewDTO brandViewDTO = new BrandViewDTO();
-        brandViewDTO.setBrand(model.getBrand().getName());
+        brandViewDTO.setBrandName(model.getBrand().getName());
         brandViewDTO.setCategory(model.getCategory());
         brandViewDTO.setImageUrl(model.getImageUrl());
         brandViewDTO.setStartYear(model.getStartYear());
         brandViewDTO.setEndYear(model.getEndYear() == null ? "present" : model.getEndYear().toString());
         brandViewDTO.setId(model.getId());
-        brandViewDTO.setName(model.getName());
+        brandViewDTO.setModelName(model.getName());
+
         return brandViewDTO;
 
     }
