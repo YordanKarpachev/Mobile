@@ -47,9 +47,8 @@ public class UserService {
 
         userRepository.save(userEntity);
 
-/*
     this.emailService.sendRegistrationEmail(userRegisterInfo.getEmail(), userRegisterInfo.getFirstName() + userRegisterInfo.getLastName());
-*/
+
     }
 
 
