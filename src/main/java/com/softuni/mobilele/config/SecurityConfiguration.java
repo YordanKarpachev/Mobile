@@ -48,6 +48,7 @@ public class SecurityConfiguration {
                         "/offers/all",
                         "/api/**",
                         "/offers/brands/**",
+                        "/users/forgot-password",
                         "/offers/all"
                   )
                 .permitAll().

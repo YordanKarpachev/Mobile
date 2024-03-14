@@ -3,6 +3,7 @@ package com.softuni.mobilele.services;
 
 import com.softuni.mobilele.domain.dtoS.model.UserRegisterFormDto;
 import com.softuni.mobilele.domain.entities.UserEntity;
+import com.softuni.mobilele.repositories.PasswordResetTokenRepository;
 import com.softuni.mobilele.repositories.RoleRepository;
 import com.softuni.mobilele.repositories.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -41,12 +42,13 @@ public class UserServiceTest {
 
     private ArgumentCaptor<UserEntity> userEntityArgumentCaptor;
 
-
+    @Mock
+    private PasswordResetTokenRepository passwordResetTokenRepository;
 
 
     @BeforeEach
     void  setUp(){
-        this.userService = new UserService(roleRepository, userRepository, mockPasswordEncoder, emailService);
+        this.userService = new UserService(roleRepository, userRepository, mockPasswordEncoder, emailService, passwordResetTokenRepository);
     }
 
 
