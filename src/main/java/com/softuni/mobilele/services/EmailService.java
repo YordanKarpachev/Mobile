@@ -22,12 +22,9 @@ public class EmailService {
     private static final String hostRailwayApp = "//https://red-pull-production.up.railway.app/";
     private static final String localhost = "http://localhost:8080/";
 
-    public EmailService(JavaMailSender javaMailSender, TemplateEngine templateEngine
-    ) {
-
+    public EmailService(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
-
     }
 
     public void sendRegistrationEmail(String userEmail, String userName) {
@@ -40,7 +37,6 @@ public class EmailService {
             mimeMessageHelper.setTo(userEmail);
             mimeMessageHelper.setSubject("Welcome to Mobile");
             mimeMessageHelper.setText(generateEmailText(userName), true);
-
             javaMailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException e) {
             throw new RuntimeException(e);
@@ -58,10 +54,7 @@ public class EmailService {
 
     public boolean sendPasswordResetEmail(String userEmail, String token) {
 
-
-
-        String resetLink = hostRailwayApp +"users/reset-password?token=" + token;
-
+        String resetLink = hostRailwayApp + "users/reset-password?token=" + token;
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
 
@@ -70,13 +63,10 @@ public class EmailService {
             mimeMessageHelper.setTo(userEmail);
             mimeMessageHelper.setSubject("Password Reset");
             mimeMessageHelper.setText(resetLink);
-
-
             javaMailSender.send(mimeMessageHelper.getMimeMessage());
             return true;
         } catch (MessagingException e) {
             return false;
-
         }
     }
 

@@ -27,10 +27,6 @@ public class UserEntity extends BaseEntity {
     @ManyToMany(cascade = CascadeType.MERGE)
     private List<UserRoleEntity> roles;
 
-
-
-
-
     public String getPassword() {
         return password;
     }

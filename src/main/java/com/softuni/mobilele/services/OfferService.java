@@ -51,8 +51,6 @@ public class OfferService {
         }
     }
 
-
-
     private AllOffersDTO map(Offer offer) {
 
         return new AllOffersDTO(offer.getSeller().getEmail(), offer.getId(), offer.getDescription(), offer.getEngine().name(), offer.getPictures().stream().findFirst().get().getUrl(), offer.getMileage(), offer.getPrice(), offer.getTransmission().name(),
@@ -60,45 +58,30 @@ public class OfferService {
                 offer.getYear(),
                 offer.getModel().getBrand().getName(),
                 offer.getModel().getName());
-
     }
 
     public void saveOffer(AddOfferDTO addOfferDTO, UserEntity user) {
 
-
-
-
         Offer offer = new Offer();
         offer.setDescription(addOfferDTO.getDescription());
         offer.setEngine(addOfferDTO.getEngine());
-
         offer.setMileage(addOfferDTO.getMileage());
         offer.setPrice(addOfferDTO.getPrice());
         offer.setTransmission(addOfferDTO.getTransmission());
         offer.setYear(addOfferDTO.getYear());
         offer.setSeller(user);
-
-
         Model model = this.modelService.findModelByName(addOfferDTO.getCarModels());
         offer.setModel(model);
         offer.setCreated(LocalDateTime.now());
         offer.setModified(LocalDateTime.now());
-
         String pictureUrl = imageCloudService.saveImage(addOfferDTO.getImg());
         Picture picture = new Picture();
         picture.setAuthor(user);
         picture.setOffer(offer);
         picture.setUrl(offer.getImageUrl());
         picture.setUrl(pictureUrl);
-
-
         offer.setPictures(Collections.singleton(picture));
-
-
-
         this.offerRepository.save(offer);
-
-
     }
 
     public Offer findById(String id) {
@@ -115,13 +98,9 @@ public class OfferService {
         offer.setYear(addOfferDTO.getYear());
         offer.setMileage(addOfferDTO.getMileage());
         offer.setModified(LocalDateTime.now());
-
         Model model = this.modelService.findModelByName(addOfferDTO.getCarModels());
         offer.setModel(model);
-
         this.offerRepository.save(offer);
-
-
     }
 
     public void deleteOffer(String id) {
@@ -163,14 +142,11 @@ public class OfferService {
 
         if (searchDTO.getName() != null && searchDTO.getModel() != null && searchDTO.getYear() == null) {
             return this.getAllOffersByModel(pageable, searchDTO.getModel());
-
-
         } else if (searchDTO.getName() != null && searchDTO.getModel() != null && searchDTO.getYear() != null) {
 
             return this.getAllOffersByModelAndYear(pageable, searchDTO.getModel(), searchDTO.getYear());
 
         }
-
         return this.getAllOffersByBrand(pageable, searchDTO.getName());
     }
 
@@ -182,13 +158,11 @@ public class OfferService {
         } else if (brand != null && model != null) {
             return this.findOffersByModelAndBrandAndYear(brand, model, year);
         } else {
-
             return 0;
         }
-
     }
 
     public Page<AllOffersDTO> findAllBySeller(Pageable pageable, String email) {
-      return   this.offerRepository.findAllBySellerEmail(  email, pageable).map(this::map);
+        return this.offerRepository.findAllBySellerEmail(email, pageable).map(this::map);
     }
 }

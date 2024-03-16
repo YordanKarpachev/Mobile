@@ -24,11 +24,7 @@ public class ModelService {
 
    return models.stream().map(Model::getName).toList();
 
-
-
-
     }
-
     public Model findModelByName(CarModels carModels) {
     return  this.modelRepository.findByName(carModels);
     }

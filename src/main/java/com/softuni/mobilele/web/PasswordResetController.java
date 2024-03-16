@@ -10,10 +10,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 @Controller
 @RequestMapping("/users")
 public class PasswordResetController {
 
+
+    private static final String INVALID_TOKEN = "Password could not be reset. The token may be invalid or has expired. Please try again!";
+    private static final String PASSWORDS_DO_NOT_MATCH = "Passwords do not match.";
+    private static final String PASSWORDS_SUCCESSFULLY_RESET = "Password has been successfully reset. You can now log in.";
+
+    private static final String LINK_TO_RESET_HAS_BEEN_SENT = "A link to reset your password has been sent.";
 
     @Autowired
     private UserService userService;
@@ -22,13 +29,12 @@ public class PasswordResetController {
     @GetMapping("/reset-password")
     public String showResetPasswordForm(@RequestParam("token") String token, Model model) {
         if (!userService.isTokenValid(token)) {
-            model.addAttribute("error", "Password could not be reset. The token may be invalid or has expired. Please try again!");
+            model.addAttribute("error", INVALID_TOKEN);
             return "forgot-password";
         }
         model.addAttribute("token", token);
         return "reset-password";
     }
-
 
 
     @PostMapping("/reset-password")
@@ -41,18 +47,18 @@ public class PasswordResetController {
 
         if (!password.equals(confirmPassword)) {
             model.addAttribute("token", token);
-            model.addAttribute("message", "Passwords do not match.");
+            model.addAttribute("message", PASSWORDS_DO_NOT_MATCH);
             return "reset-password";
         }
 
 
         if (!userService.resetUserPassword(token, password)) {
-            model.addAttribute("message", "Password could not be reset. The token may be invalid or has expired.");
+            model.addAttribute("message", INVALID_TOKEN);
             return "redirect:forgot-password";
         }
 
 
-        redirectAttributes.addFlashAttribute("welcomeMessage", "Password has been successfully reset. You can now log in.");
+        redirectAttributes.addFlashAttribute("welcomeMessage", PASSWORDS_SUCCESSFULLY_RESET);
         return "redirect:/users/login";
     }
 
@@ -63,11 +69,10 @@ public class PasswordResetController {
 
         boolean success = userService.sendPasswordResetEmail(email);
         if (success) {
-            redirectAttributes.addFlashAttribute("error", "A link to reset your password has been sent." + email);
+            redirectAttributes.addFlashAttribute("error", LINK_TO_RESET_HAS_BEEN_SENT + email);
         } else {
-            redirectAttributes.addFlashAttribute("error", "Email " + email +" could not be found.");
+            redirectAttributes.addFlashAttribute("error", "Email " + email + " could not be found.");
         }
-
 
 
         return "redirect:/users/forgot-password";

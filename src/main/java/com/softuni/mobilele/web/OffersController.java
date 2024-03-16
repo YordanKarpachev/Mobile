@@ -53,7 +53,9 @@ public class OffersController {
 
     public static final String BINDING_RESULT_PATH = "org.springframework.validation.BindingResult.";
 
-    @ModelAttribute(name = "addOfferDto")
+    public static final String ADD_OFFER_DTO = "addOfferDto";
+
+    @ModelAttribute(name = ADD_OFFER_DTO)
     public AddOfferDTO initAddOfferDto() {
         return new AddOfferDTO();
     }
@@ -77,14 +79,14 @@ public class OffersController {
     }
 
     @PostMapping("/add")
-    public String postAddOffer(@Valid @ModelAttribute(name = "addOfferDto") AddOfferDTO addOfferDTO,
+    public String postAddOffer(@Valid @ModelAttribute(name = ADD_OFFER_DTO) AddOfferDTO addOfferDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes,
                                @AuthenticationPrincipal UserDetails principal) {
         UserEntity user = this.userService.findUserEntityByUsername(principal.getUsername());
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addOfferDto", addOfferDTO)
-                    .addFlashAttribute(BINDING_RESULT_PATH + "addOfferDto", bindingResult);
+            redirectAttributes.addFlashAttribute(ADD_OFFER_DTO, addOfferDTO)
+                    .addFlashAttribute(BINDING_RESULT_PATH + ADD_OFFER_DTO, bindingResult);
             return "redirect:/offers/add";
         }
       this.offerService.saveOffer(addOfferDTO, user);
@@ -108,11 +110,11 @@ public class OffersController {
 
     @PostMapping("/update/{id}")
     public String postUpdateOffer(@PathVariable String id,
-                                  @Valid @ModelAttribute("addOfferDto") AddOfferDTO addOfferDTO,
+                                  @Valid @ModelAttribute(ADD_OFFER_DTO) AddOfferDTO addOfferDTO,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addOfferDto", addOfferDTO);
-            redirectAttributes.addFlashAttribute(BINDING_RESULT_PATH + "addOfferDto", bindingResult);
+            redirectAttributes.addFlashAttribute(ADD_OFFER_DTO, addOfferDTO);
+            redirectAttributes.addFlashAttribute(BINDING_RESULT_PATH +ADD_OFFER_DTO, bindingResult);
             return "redirect:/offers/update/" + id;
         }
         this.offerService.updateOffer(addOfferDTO);
@@ -172,7 +174,6 @@ public class OffersController {
         addOfferDTO.setTransmission(offer.getTransmission());
         addOfferDTO.setYear(offer.getYear());
         addOfferDTO.setDescription(offer.getDescription());
-
         addOfferDTO.setId(offer.getId());
         addOfferDTO.setCarModels(offer.getModel().getName());
         return addOfferDTO;

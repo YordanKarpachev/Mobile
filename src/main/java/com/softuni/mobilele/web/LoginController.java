@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/users")
 public class LoginController {
 
-
+    private static final String SUCCESSFULLY_REGISTERED = "You have successfully registered. Please sign in to continue.";
 
 
 
@@ -24,7 +24,7 @@ public class LoginController {
         if (model.containsAttribute("firstName") && model.containsAttribute("lastName")) {
             String firstName = (String) model.asMap().get("firstName");
             String lastName = (String) model.asMap().get("lastName");
-            model.addAttribute("welcomeMessage", "Welcome, " + firstName + " " + lastName + "! You have successfully registered. Please sign in to continue.");
+            model.addAttribute("welcomeMessage", "Welcome, " + firstName + " " + lastName + "! "+ SUCCESSFULLY_REGISTERED);
         }
         return "auth-login";
     }

@@ -37,37 +37,27 @@ public class HomeController extends BaseController {
 
     @GetMapping
     public ModelAndView getHome(Model model, HttpServletRequest request) {
-
-
-
         model.addAttribute("searchDto", new SearchDTO());
         model.addAttribute("brands", brandService.getAllBrands());
         model.addAttribute("brand", new Brand());
 
-
         return super.view("index");
     }
-
     @GetMapping("/welcome")
     public String welcome(@AuthenticationPrincipal UserDetails user, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("welcomeMessage", "Welcome to MobiLe Yordan Project " + user.getUsername() + "!");
         return "redirect:/";
     }
-
     @PostMapping
     public String searchHome(Model model, @ModelAttribute(name = "searchDto") SearchDTO searchDTO,
                              @PageableDefault(sort = "offerId",
                                      size = 4)
                              Pageable pageable) {
-
         Page<AllOffersDTO> allOffersDTOS = this.offerService.getOffers(pageable, searchDTO);
         model.addAttribute("dtos", allOffersDTOS);
 
-
         return "offers";
-
     }
-
     @GetMapping("api/getModelStartYear/{carModel}")
     public ResponseEntity<Integer> getModelStartYear(@PathVariable CarModels carModel) {
         com.softuni.mobilele.domain.entities.Model modelByName = this.modelService.findModelByName(carModel);

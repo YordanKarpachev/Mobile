@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private EmailService emailService;
+    private final EmailService emailService;
 
     private final UserRepository userRepository;
 
@@ -34,15 +34,10 @@ public class UserService {
     @Autowired
 
     public UserService(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder
-            , EmailService emailService, PasswordResetTokenRepository passwordResetTokenRepository
-
-    ) {
-
+            , EmailService emailService, PasswordResetTokenRepository passwordResetTokenRepository) {
         this.userRepository = userRepository;
         this.emailService = emailService;
-
         this.passwordEncoder = passwordEncoder;
-
         this.passwordResetTokenRepository = passwordResetTokenRepository;
     }
 
@@ -53,8 +48,6 @@ public class UserService {
                 .setLastName(registerDto.getLastName())
                 .setEmail(registerDto.getEmail())
                 .setPassword(passwordEncoder.encode(registerDto.getPassword()));
-
-
 
         if (this.userRepository.findByEmail(registerDto.getEmail()).isEmpty()) {
             userRepository.save(userEntity);
@@ -73,7 +66,6 @@ public class UserService {
         UserEntity user = userOptional.get();
         TokenGenerator tokenGenerator = new TokenGenerator();
         String token = tokenGenerator.generateToken();
-
         savePasswordResetToken(user, token);
         emailService.sendPasswordResetEmail(user.getEmail(), token);
         return true;
@@ -84,15 +76,12 @@ public class UserService {
         resetToken.setToken(token);
         resetToken.setUserEntity(user);
         resetToken.setExpiryDate(LocalDateTime.now().plusHours(24));
-
         passwordResetTokenRepository.save(resetToken);
     }
-
 
     public UserEntity findUserEntityByUsername(String username) {
         return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User with email " + username + " not found!"));
     }
-
 
     public boolean isTokenExpired(PasswordResetToken token) {
         return LocalDateTime.now().isAfter(token.getExpiryDate());
@@ -122,9 +111,7 @@ public class UserService {
         UserEntity user = resetToken.getUserEntity();
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
-
         passwordResetTokenRepository.delete(resetToken);
-
         return true;
     }
 

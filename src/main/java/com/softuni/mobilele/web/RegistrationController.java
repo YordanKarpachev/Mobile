@@ -59,7 +59,4 @@ public class RegistrationController {
         return "redirect:/users/login";
     }
 
-
-
-
 }

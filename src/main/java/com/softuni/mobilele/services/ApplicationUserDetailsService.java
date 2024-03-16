@@ -37,10 +37,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
         return new User(
                 userEntity.getEmail(),
                 userEntity.getPassword(),
-                extractAuthorities(userEntity)
-        );
-
-
+                extractAuthorities(userEntity));
     }
 
     private List<GrantedAuthority> extractAuthorities(UserEntity userEntity) {
@@ -54,5 +51,4 @@ public class ApplicationUserDetailsService implements UserDetailsService {
     private GrantedAuthority mapRole(UserRoleEntity userRoleEntity) {
         return new SimpleGrantedAuthority("ROLE_" + userRoleEntity.getRole().name());
     }
-
 }
