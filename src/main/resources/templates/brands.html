@@ -3,7 +3,7 @@
 
 <head th:replace="~{fragments/head}">
 </head>
-<body>
+<body style="display: flex; flex-direction: column; min-height: 100vh; background-image: url('/images/all-brands.jpg');">
 
 <div>
     <nav th:replace="~{fragments/navigation}"></nav>
@@ -11,7 +11,7 @@
 
 <div class="container" style="padding-bottom: 10px;  overflow-auto;">
 
-    <h2 class="text-center text-white mt-5" th:text="${myOffers != null} ? 'My Offers' : 'All Brands'"></h2>
+    <h2 class="text-center text-white mt-5" th:text="${myOffers != null} ? '' : ''"></h2>
 
     <div th:if="${dtos.empty}" class="text-center" style="color: #CCCCCC; padding: 20px; font-size: 18px;">
         You currently have no open offers.

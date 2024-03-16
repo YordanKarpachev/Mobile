@@ -22,7 +22,7 @@ import java.util.Optional;
 public class UserService {
 
     private EmailService emailService;
-    private final RoleRepository roleRepository;
+
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -35,14 +35,14 @@ public class UserService {
 
     public UserService(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder
             , EmailService emailService, PasswordResetTokenRepository passwordResetTokenRepository
-                       // , @Value("${mobile.admin.defaultpass}") String defaultAdminPass
+
     ) {
-        this.roleRepository = roleRepository;
+
         this.userRepository = userRepository;
         this.emailService = emailService;
 
         this.passwordEncoder = passwordEncoder;
-        //   this.defaultAdminPass = defaultAdminPass;
+
         this.passwordResetTokenRepository = passwordResetTokenRepository;
     }
 
