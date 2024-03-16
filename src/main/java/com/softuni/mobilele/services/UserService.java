@@ -54,9 +54,13 @@ public class UserService {
                 .setEmail(registerDto.getEmail())
                 .setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
-        userRepository.save(userEntity);
 
-        this.emailService.sendRegistrationEmail(registerDto.getEmail(), registerDto.getFirstName() + registerDto.getLastName());
+
+        if (this.userRepository.findByEmail(registerDto.getEmail()).isEmpty()) {
+            userRepository.save(userEntity);
+
+            this.emailService.sendRegistrationEmail(registerDto.getEmail(), registerDto.getFirstName() + registerDto.getLastName());
+        }
     }
 
     public boolean sendPasswordResetEmail(String userEmail) {
@@ -68,11 +72,11 @@ public class UserService {
 
         UserEntity user = userOptional.get();
         TokenGenerator tokenGenerator = new TokenGenerator();
-      String   token = tokenGenerator.generateToken();
+        String token = tokenGenerator.generateToken();
 
         savePasswordResetToken(user, token);
         emailService.sendPasswordResetEmail(user.getEmail(), token);
-    return true;
+        return true;
     }
 
     private void savePasswordResetToken(UserEntity user, String token) {
@@ -88,7 +92,6 @@ public class UserService {
     public UserEntity findUserEntityByUsername(String username) {
         return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User with email " + username + " not found!"));
     }
-
 
 
     public boolean isTokenExpired(PasswordResetToken token) {

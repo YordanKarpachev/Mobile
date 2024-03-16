@@ -14,7 +14,7 @@
     <h2 class="text-center text-white">Login</h2>
 
     <form th:method="POST"
-          th:action="@{/users/forgot-password}"
+          th:action="@{/users/login}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
 
 
@@ -40,7 +40,7 @@
             <input value="password" id="password" name="password" type="password" min="5"
                    max="20" class="form-control"
                    placeholder="Password"/>
-            <a href="/users/forgot-password" class="text-white">Forgot Password?</a>
+            <a href="LINK_ZU_IHRER_PASSWORT_VERGESSEN_SEITE" class="text-white">Forgot Password?</a>
         </div>
         <div th:if="${welcomeMessage}"  class="alert alert-info text-center">
             <p th:text="${welcomeMessage}"></p>
