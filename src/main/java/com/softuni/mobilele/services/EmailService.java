@@ -19,6 +19,9 @@ public class EmailService {
     private final TemplateEngine templateEngine;
 
 
+    private static final String hostRailwayApp = "//https://red-pull-production.up.railway.app/";
+    private static final String localhost = "http://localhost:8080/";
+
     public EmailService(JavaMailSender javaMailSender, TemplateEngine templateEngine
     ) {
 
@@ -53,14 +56,11 @@ public class EmailService {
         return templateEngine.process("email/registration", ctx);
     }
 
-    public boolean sendPasswordResetEmail(String userEmail, String tokenl) {
+    public boolean sendPasswordResetEmail(String userEmail, String token) {
 
 
-        TokenGenerator tokenGenerator = new TokenGenerator();
-        String token = tokenGenerator.generateToken();
 
-
-        String resetLink = "http://localhost:8080/reset-password?token=" + token;
+        String resetLink = hostRailwayApp +"users/reset-password?token=" + token;
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
@@ -69,7 +69,8 @@ public class EmailService {
             mimeMessageHelper.setFrom("mobileprojectyk@gmail.com");
             mimeMessageHelper.setTo(userEmail);
             mimeMessageHelper.setSubject("Password Reset");
-            mimeMessageHelper.setText(generateEmailText(resetLink), true);
+            mimeMessageHelper.setText(resetLink);
+
 
             javaMailSender.send(mimeMessageHelper.getMimeMessage());
             return true;

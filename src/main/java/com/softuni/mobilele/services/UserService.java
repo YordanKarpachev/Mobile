@@ -97,4 +97,35 @@ public class UserService {
     public boolean isTokenExpired(PasswordResetToken token) {
         return LocalDateTime.now().isAfter(token.getExpiryDate());
     }
+
+    public PasswordResetToken getPasswordResetToken(String token) {
+        return passwordResetTokenRepository.findByToken(token)
+                .orElse(null);
+    }
+
+    public boolean isTokenValid(String token) {
+        PasswordResetToken resetToken = getPasswordResetToken(token);
+        if (resetToken != null && !isTokenExpired(resetToken)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean resetUserPassword(String token, String newPassword) {
+        PasswordResetToken resetToken = passwordResetTokenRepository.findByToken(token)
+                .orElse(null);
+
+        if (resetToken == null || isTokenExpired(resetToken)) {
+            return false;
+        }
+
+        UserEntity user = resetToken.getUserEntity();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+        passwordResetTokenRepository.delete(resetToken);
+
+        return true;
+    }
+
 }

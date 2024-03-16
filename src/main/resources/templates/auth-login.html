@@ -40,7 +40,14 @@
             <input value="password" id="password" name="password" type="password" min="5"
                    max="20" class="form-control"
                    placeholder="Password"/>
-            <a href="LINK_ZU_IHRER_PASSWORT_VERGESSEN_SEITE" class="text-white">Forgot Password?</a>
+            <div style="margin-top: 15px;">
+                <a href="/users/forgot-password" class="text-white" style="display: block; font-size: 1.2em;">Forgot Password?</a>
+            </div>
+            <div>
+                <a href="/users/register" class="text-white" style="display: block; font-size: 1.2em;">Create new Account</a>
+            </div>
+
+
         </div>
         <div th:if="${welcomeMessage}"  class="alert alert-info text-center">
             <p th:text="${welcomeMessage}"></p>

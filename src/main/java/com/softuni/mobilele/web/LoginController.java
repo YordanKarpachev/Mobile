@@ -14,22 +14,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/users")
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
 
 
-    @PostMapping("/forgot-password")
-    public String processForgotPassword(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        String email = request.getParameter("email");
-        // Methode zum Senden des Passwort-Zurücksetz-Links
-        boolean success = userService.sendPasswordResetEmail(email);
-        if (success) {
-            redirectAttributes.addFlashAttribute("message", "Ein Link zum Zurücksetzen Ihres Passworts wurde gesendet.");
-        } else {
-            redirectAttributes.addFlashAttribute("error", "E-Mail konnte nicht gefunden werden.");
-        }
-        return "redirect:/users/forgot-password";
-    }
+
+
 
     @GetMapping("/login")
     public String getLogin(Model model) {
@@ -49,12 +37,6 @@ public class LoginController {
         redirectAttributes.addFlashAttribute("bad_credentials", true);
 
         return "redirect:/users/login";
-    }
-
-
-    @GetMapping("/forgot-password")
-    public String showForgotPasswordForm() {
-        return "forgot-password";
     }
 
 
