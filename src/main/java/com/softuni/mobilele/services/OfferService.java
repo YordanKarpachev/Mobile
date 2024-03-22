@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.HashSet;
 
 @Service
 public class OfferService {
@@ -74,6 +75,7 @@ public class OfferService {
         offer.setModel(model);
         offer.setCreated(LocalDateTime.now());
         offer.setModified(LocalDateTime.now());
+
         String pictureUrl = imageCloudService.saveImage(addOfferDTO.getImg());
         Picture picture = new Picture();
         picture.setAuthor(user);
@@ -81,6 +83,7 @@ public class OfferService {
         picture.setUrl(offer.getImageUrl());
         picture.setUrl(pictureUrl);
         offer.setPictures(Collections.singleton(picture));
+
         this.offerRepository.save(offer);
     }
 
@@ -100,6 +103,18 @@ public class OfferService {
         offer.setModified(LocalDateTime.now());
         Model model = this.modelService.findModelByName(addOfferDTO.getCarModels());
         offer.setModel(model);
+
+
+        MultipartFile newImage = addOfferDTO.getImg();
+        if(newImage != null && !newImage.isEmpty()) {
+            String pictureUrl = imageCloudService.saveImage(newImage);
+            Picture picture = new Picture();
+            picture.setAuthor(offer.getSeller());
+            picture.setOffer(offer);
+            picture.setUrl(pictureUrl);
+            offer.setPictures(new HashSet<>(Collections.singletonList(picture)));
+        }
+
         this.offerRepository.save(offer);
     }
 

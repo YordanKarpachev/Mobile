@@ -13,6 +13,7 @@
 <div class="container">
     <h2 class="text-center text-white">Update Offer</h2>
     <form th:method="POST"
+          enctype="multipart/form-data"
           th:action="@{/offers/update/{id}(id=${offerDetails.id})}"
           th:object="${offerDetails}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
@@ -151,17 +152,14 @@
             </p>
         </div>
 
-        <div class="form-group">
-            <label class="text-white font-weight-bold" th:for="imageUrl">Image URL</label>
-            <input id="imageUrl" type="url" class="form-control"
-                   placeholder="Put vehicle image URL here"
-                   th:field="*{imageUrl}"
-            >
+        <div>
+            <div class="form-group">
+                <label for="img" class="col-form-label ">Images</label>
+                <input type="file" name="img" required id="img" class="form-control-file" aria-describedby="inputGpxError">
+                <small id="inputGpxError" class="invalid-feedback form-text bg-danger rounded">Must be valid image</small>
 
-            <p th:if="${#fields.hasErrors('imageUrl')}"
-               class="errors alert alert-danger">
-                Vehicle image URL is required.
-            </p>
+                <div id="fileNameDisplay" class="mt-2 text-white"></div>
+            </div>
         </div>
 
         <div class="row">
@@ -177,7 +175,7 @@
 <div th:include="~{fragments/footer}">
 
 </div>
-<script type="module"  th:src="@{/js/offers.js}" >
+<script type="module"  th:src="@{/js/addOffersPage.js}" >
 
 </script>
 
